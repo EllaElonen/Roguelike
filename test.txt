@@ -1,8 +1,0 @@
-git status
-git branch
-touch namn.txt
-git add namn.txt
-git commit -m "Add item.txt"
-git push
-git add .
-git commit -m "Modify test.txt."
