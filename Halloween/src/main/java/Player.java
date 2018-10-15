@@ -15,5 +15,6 @@ public class Player {
         state = this.state;
         position = this.position;
         speed = this.speed;
+        //test
     }
 }
