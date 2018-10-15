@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Map {
+    //komment to test
 
     protected boolean shown;
     private int x, y;
