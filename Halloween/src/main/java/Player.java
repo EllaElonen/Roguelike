@@ -6,6 +6,8 @@ public class Player {
     String state;
     int position;
     int speed;
+    
+    int Hastighet;
 
     public Player(){
     	
