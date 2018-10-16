@@ -1,4 +1,3 @@
-package game;
 
 public interface Award {
 	public int INCREASE_ATTACK = 0;

@@ -1,4 +1,4 @@
-package game;
+
 import java.util.Random;
 
 public class Pumpkin extends Item implements Award{

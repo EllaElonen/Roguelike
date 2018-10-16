@@ -1,4 +1,4 @@
-package game;
+
 import java.awt.image.BufferedImage;
 abstract public class Item {
 	protected BufferedImage image;
