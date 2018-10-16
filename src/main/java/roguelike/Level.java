@@ -1,4 +1,4 @@
-package Roguelike;
+package roguelike;
 
 import java.awt.*;
 import java.util.HashMap;

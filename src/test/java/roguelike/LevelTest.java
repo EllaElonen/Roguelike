@@ -1,8 +1,9 @@
-import Roguelike.Level;
-import org.junit.jupiter.api.Test;
+package roguelike;
+
 import static org.junit.jupiter.api.Assertions.*;
-import java.awt.*;
+import java.awt.Point;
 import java.util.HashSet;
+import org.junit.jupiter.api.Test;
 
 public class LevelTest {
 
@@ -22,7 +23,7 @@ public class LevelTest {
         level.addPosition(new Point(1,1));
         level.addPosition((new Point(1,2)));
         Player player = new Player(new Point(1,1), "name", 10, 3, 2);
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             level.moveEntityToPosition(player, new Point(2,2));
         });
     }

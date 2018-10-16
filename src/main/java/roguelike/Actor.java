@@ -1,9 +1,9 @@
-package Roguelike;
+package roguelike;
 
 import java.awt.*;
 import java.util.UUID;
 
-public class Actor extends Entity{
+public class Actor extends Entity {
     private String name;
     private int healthPoints;
     private int speed;
