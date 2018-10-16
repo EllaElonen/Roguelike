@@ -1,14 +1,11 @@
-package game;
 
 import java.awt.image.BufferedImage;
-
 
 public class Player extends Item{
 	private int life;
 	private int attack;
 	private int defence;
-	
-	
+
 	public Player() {
 		image = ControlPanel.player;
 		width = 50;
@@ -35,5 +32,4 @@ public class Player extends Item{
 	public void moveDown() {
 		y+=50;	
 	}
-	
 }
