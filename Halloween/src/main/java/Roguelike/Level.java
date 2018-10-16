@@ -20,6 +20,7 @@ public class Level {
         return positions;
     }
 
+    // Moves entity to position
     public void moveEntityToPosition(Entity entity, Point position){
         if (!positions.contains(position)) {
             throw new IllegalArgumentException("This position does not exist in this level.");
