@@ -8,12 +8,17 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.BeforeEach;
 
 public class LevelTest {
-	
+	String levelName = "Cellar 1-1";
 	Level level;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		level = new Level();
+		level = new Level(levelName);
+	}
+	
+	@Test
+	void getNameOfLevel() {
+		assertEquals(level.getName(), levelName);
 	}
 	
 	@Test
@@ -68,5 +73,16 @@ public class LevelTest {
 		level.placeEntity(entity, point);
 		
 		assertEquals(level.getEntityInLocation(point), entity);
+	}
+	
+	@Test
+	void addTwoEqualPositions() {
+		Point p1 = new Point(1,1);
+		Point p2 = new Point(1,1);
+		
+		level.addPosition(p1);
+		level.addPosition(p2);
+		
+		assertEquals(level.getPositions().size(), 1);
 	}
 }

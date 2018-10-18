@@ -5,11 +5,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import com.google.common.collect.*;
 public class Level {
+	private String name;
 	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
 	private HashSet<Point> positions = new HashSet<>();
 	
-	public Level() {
-		
+	public Level(String name) {
+		this.name = name;
 	}
 	
 	public void addPosition(Point point) {
@@ -38,5 +39,13 @@ public class Level {
 	
 	public Entity getEntityInLocation(Point point) {
 		return entityLocations.inverse().get(point);
+	}
+	
+	public HashSet<Point> getPositions() {
+		return positions;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
