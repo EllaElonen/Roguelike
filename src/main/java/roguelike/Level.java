@@ -3,32 +3,40 @@ package roguelike;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
-
+import com.google.common.collect.*;
 public class Level {
-    HashMap <Point, Entity> entityLocations = new HashMap<Point,Entity>();
-    HashSet<Point> positions = new HashSet<Point>();
-
-    public Level(){
-    }
-
-    public boolean positionAvailable(Point position){
-        boolean positionExists = positions.contains(position);
-        return positionExists && entityLocations.get(position) != null;
-    }
-
-    public HashSet<Point> getPositions() {
-        return positions;
-    }
-
-    public void moveEntityToPosition(Entity entity, Point position){
-        if (!positions.contains(position)) {
-            throw new IllegalArgumentException("This position does not exist in this level.");
-        }
-
-        entityLocations.put(position,entity);
-    }
-
-    public void addPosition(Point point){
-        positions.add(point);
-    }
+	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
+	private HashSet<Point> positions = new HashSet<>();
+	
+	public Level() {
+		
+	}
+	
+	public void addPosition(Point point) {
+		positions.add(point);
+	}
+	
+	public boolean positionExists(Point point) {
+		return positions.contains(point);
+	}
+	
+	public void placeEntity(Entity entity, Point point) {
+		if (!positions.contains(point)) {
+			throw new IllegalArgumentException("Level does not have that point.");
+		}
+		
+		if (entityLocations.inverse().get(point) != null) {
+			throw new IllegalArgumentException("Point is taken.");
+		}
+		
+		entityLocations.put(entity, point);
+	}
+	
+	public Point getEntityPlacement(Entity entity) {
+		return entityLocations.get(entity);
+	}
+	
+	public Entity getEntityInLocation(Point point) {
+		return entityLocations.inverse().get(point);
+	}
 }
