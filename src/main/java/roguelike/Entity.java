@@ -6,7 +6,7 @@ import java.util.UUID;
 public class Entity {
 
     private String uniqueID;
-    private Point position;
+    Point position;
 
     public Entity(Point position){
         this(position, UUID.randomUUID().toString());

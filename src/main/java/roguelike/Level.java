@@ -1,16 +1,17 @@
 package roguelike;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import java.awt.*;
-import java.util.HashMap;
 import java.util.HashSet;
-import com.google.common.collect.*;
 public class Level {
 	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
+
 	private HashSet<Point> positions = new HashSet<>();
 	
 	public Level() {
-		
-	}
+
+    }
 	
 	public void addPosition(Point point) {
 		positions.add(point);

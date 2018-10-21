@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Actor extends Entity {
     private String name;
-    private int healthPoints;
+    int healthPoints;
     private int speed;
     private int intelligence;
 
@@ -19,5 +19,9 @@ public class Actor extends Entity {
         this.healthPoints = healthPoints;
         this.speed = speed;
         this.intelligence = intelligence;
+    }
+
+    public int getHealthPoints() {
+         return healthPoints;
     }
 }
