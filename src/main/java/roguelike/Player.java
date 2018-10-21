@@ -27,7 +27,7 @@ public class Player extends Actor {
 
 	}
 
-	public boolean itemExists(Item item) {
+	public boolean itemExistsInInventory(Item item) {
 		return items.contains(item);
 	}
 
@@ -37,7 +37,7 @@ public class Player extends Actor {
 	}
 
 	// ger referenser till alla Items
-	public HashSet<Item> getItems() {
+	public HashSet<Item> getItemsFromInventory() {
 		return items;
 
 	}

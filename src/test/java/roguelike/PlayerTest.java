@@ -36,7 +36,7 @@ public class PlayerTest {
 	void testAddItemToInventory_returnsAddedItem() {
 		testPlayer.addItemToInventory(testItem);
 
-		assertTrue(testPlayer.itemExists(testItem));
+		assertTrue(testPlayer.itemExistsInInventory(testItem));
 
 	}
 
@@ -59,9 +59,9 @@ public class PlayerTest {
 		testPlayer.addItemToInventory(testItem2);
 		testPlayer.addItemToInventory(testItem3);
 
-		assertTrue(testPlayer.getItems().contains(testItem));
-		assertTrue(testPlayer.getItems().contains(testItem2));
-		assertTrue(testPlayer.getItems().contains(testItem3));
+		assertTrue(testPlayer.getItemsFromInventory().contains(testItem));
+		assertTrue(testPlayer.getItemsFromInventory().contains(testItem2));
+		assertTrue(testPlayer.getItemsFromInventory().contains(testItem3));
 
 	}
 
