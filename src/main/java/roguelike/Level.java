@@ -41,6 +41,36 @@ public class Level {
 		return entityLocations.inverse().get(point);
 	}
 	
+	public void moveEntity(Entity entity, Direction direction) {
+		Point oldPoint = entityLocations.get(entity);
+		if (oldPoint != null) {
+			Point newPoint;
+			switch(direction) {
+				case UP:
+					newPoint = new Point(oldPoint.x, oldPoint.y + 1);
+					break;
+				case DOWN:
+					newPoint = new Point(oldPoint.x, oldPoint.y - 1);
+					break;
+				case RIGHT:
+					newPoint = new Point(oldPoint.x + 1, oldPoint.y);
+					break;
+				case LEFT:
+					newPoint = new Point(oldPoint.x - 1, oldPoint.y);
+					break;
+				default:
+					newPoint = oldPoint;
+			}
+			if (positionAvailable(newPoint)) {
+				entityLocations.put(entity, newPoint);
+			}
+		}
+	}
+	
+	private boolean positionAvailable(Point point) {
+		return positionExists(point) && entityLocations.inverse().get(point) == null;
+	}
+	
 	public HashSet<Point> getPositions() {
 		return positions;
 	}

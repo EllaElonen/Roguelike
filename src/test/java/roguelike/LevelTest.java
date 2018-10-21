@@ -85,4 +85,41 @@ public class LevelTest {
 		
 		assertEquals(level.getPositions().size(), 1);
 	}
+	
+	@Test
+	void moveEntityUp() {
+		Entity entity = new Entity(new Point(1, 1));
+		
+		level.addPosition(new Point(1, 1));
+		level.addPosition(new Point(1, 2));
+		level.placeEntity(entity, new Point(1, 1));
+		level.moveEntity(entity, Direction.UP);
+		
+		assertEquals(level.getEntityPlacement(entity), new Point(1, 2));
+	}
+	
+	@Test 
+	void moveEntityToNonExistingPosition() {
+		Entity entity = new Entity(new Point(1, 1));
+		
+		level.addPosition(new Point(1, 1));
+		level.addPosition(new Point(1, 2));
+		level.placeEntity(entity, new Point(1, 1));
+		level.moveEntity(entity, Direction.DOWN);
+		assertEquals(level.getEntityPlacement(entity), new Point(1, 1));
+	}
+	
+	@Test
+	void moveEntityToTakenLocation() {
+		Entity entity1 = new Entity(new Point(1, 1));
+		Entity entity2 = new Entity(new Point(1, 2));
+		
+		level.addPosition(new Point(1, 1));
+		level.addPosition(new Point(2, 1));
+		level.placeEntity(entity1, new Point(1, 1));
+		level.placeEntity(entity2, new Point(2, 1));
+		level.moveEntity(entity1, Direction.RIGHT);
+		
+		assertEquals(level.getEntityPlacement(entity1), new Point(1, 1));
+	}
 }
