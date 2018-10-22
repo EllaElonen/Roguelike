@@ -37,5 +37,10 @@ public class PlayerTest {
 		int intelligence = 7;
 		Player player = new Player(position, "name", healthPoints, speed, intelligence);
 		assertNotEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
+<<<<<<< HEAD
  }
+=======
+
+	}
+>>>>>>> 178886e5cdb904305e3eaa6f1d713dd01a7448d1
 }
