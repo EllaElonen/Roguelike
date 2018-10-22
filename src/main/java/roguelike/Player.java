@@ -6,14 +6,8 @@ import java.util.Random;
 import java.util.HashSet;
 
 public class Player extends Actor {
-
 	
 	public int LIFE = 1;
-
-	public Player(Point position, String name, int healthPoints, int speed, int intelligence) {
-		super(position, name, healthPoints, speed, intelligence);
-	}
-
 
 	private static final int LEFTWARDS = 0;
 	private static final int RIGHTWARDS = 1;
@@ -23,16 +17,17 @@ public class Player extends Actor {
 	private int fireLength=3;
 	
 	private HashSet<Item> items = new HashSet<>();
-
-	
+    private int extraLives;
 
 	public void moveUp(Level level) {
 		double newX = getPosition().getX();
 		double newY = getPosition().getY() + 1.0;
 		Point newPoint = new Point((int) newX, (int) newY);
 	}
+    public Player(Point position, String name, int healthPoints, int speed, int intelligence, int strength) {
+        super(position, name, healthPoints, speed, intelligence, strength);
+    }
 
-	
 	public String getStats() {
 		return "healthPoints: " + getHealthPoints() + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence();
 	}
@@ -145,4 +140,38 @@ public class Player extends Actor {
 		return new Point(position.x,position.y);
 	}
 
+	
+
+    public void moveDown(Level level) {
+        double newX = getPosition().getX();
+        double newY = getPosition().getY() - 1.0;
+        Point newPoint = new Point((int) newX, (int) newY);
+        setPosition(newPoint);
+    }
+
+    public void moveLeft(Level level) {
+        double newX = getPosition().getX() - 1.0;
+        double newY = getPosition().getY();
+        Point newPoint = new Point((int) newX, (int) newY);
+        setPosition(newPoint);
+    }
+
+    public void moveRight(Level level) {
+        double newX = getPosition().getX()+ 1.0;
+        double newY = getPosition().getY();
+        Point newPoint = new Point((int) newX, (int) newY);
+        setPosition(newPoint);
+    }
+
+    public void setPosition(Point position){
+	    this.position = position;
+    }
+
+    public int getExtraLives(){
+	    return extraLives;
+    }
+
+    public void addExtraLives(int amount){
+	    extraLives = extraLives + amount;
+    }
 }

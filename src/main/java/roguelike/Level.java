@@ -1,9 +1,9 @@
 package roguelike;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import java.awt.*;
-import java.util.HashMap;
 import java.util.HashSet;
-import com.google.common.collect.*;
 public class Level {
 	public static final int WIDTH = 50;
 	public static final int HEIGHT = 40;
@@ -13,10 +13,14 @@ public class Level {
 	public static  HashSet<Point> positions = new HashSet<>();
 
 	
+public Level() {
+	
+}
+
 	public Level(String name) {
 		this.name = name;
 	}
-	
+
 	public void addPosition(Point point) {
 		positions.add(point);
 	}
