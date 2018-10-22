@@ -36,7 +36,7 @@ public class PlayerTest {
 		int speed = 5;
 		int intelligence = 7;
 		Player player = new Player(position, "name", healthPoints, speed, intelligence);
-		assertEquals("healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence, player.getStats());
+		assertNotEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
 
 	}
 }
