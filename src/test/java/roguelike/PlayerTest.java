@@ -17,7 +17,7 @@ public class PlayerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		testPlayer = new Player(position, "name", 10, 3, 2);
+		testPlayer = new Player(position, "name", 10, 3, 2, 10);
 		position = new Point(1, 1);
 		testItem = new Item("testName");
 	}
@@ -25,8 +25,8 @@ public class PlayerTest {
 	@Test
 
 	void nonEqualStats() {
-		Player testPlayer1 = new Player(position, "name", 10, 9, 4);
-		Player testPlayer2 = new Player(position, "name", 10, 9, 4);
+		Player testPlayer1 = new Player(position, "name", 10, 9, 4, 10);
+		Player testPlayer2 = new Player(position, "name", 10, 9, 4, 10);
 		assertNotEquals(testPlayer1, testPlayer2);
 	}
 	
@@ -35,7 +35,8 @@ public class PlayerTest {
 		int healthPoints = 10;
 		int speed = 5;
 		int intelligence = 7;
-		Player player = new Player(position, "name", healthPoints, speed, intelligence);
+		int strength = 5;
+		Player player = new Player(position, "name", healthPoints, speed, intelligence, strength);
 		assertNotEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
 
     }
@@ -95,8 +96,6 @@ public class PlayerTest {
 
 	}
 
-	private Point position = new Point(1, 1);
-
 	@Test
 	void setupPlayerObject() {
 		Player testPlayer = new Player(position, "name", 10, 3, 2, 5);
@@ -112,7 +111,7 @@ public class PlayerTest {
 
     @Test
     void moveUp() {
-	    Level level = new Level();
+	    Level level = new Level("bla");
         Player player = new Player(position, "name", 10, 3, 2, 5);
         Point newPoint = new Point(1,2);
         player.moveUp(level);
@@ -121,7 +120,7 @@ public class PlayerTest {
 
     @Test
     public void moveDown() {
-        Level level = new Level();
+        Level level = new Level("bla");
         Player player = new Player(position, "name", 10, 3, 2, 5);
         Point newPoint = new Point(1,0);
         player.moveDown(level);
@@ -130,7 +129,7 @@ public class PlayerTest {
 
     @Test
     public void moveLeft() {
-        Level level = new Level();
+        Level level = new Level("bla");
         Player player = new Player(position, "name", 10, 3, 2, 5);
         player.moveLeft(level);
         Point newPoint = new Point(0, 1);
@@ -141,11 +140,11 @@ public class PlayerTest {
     public void addExtraLives(){
 	    Player player = new Player(position, "name", 10, 3, 2, 5);
 	    player.addExtraLives(1);
-        Assertions.assertEquals(player.getExtraLives(), 1);
+        assertEquals(player.getExtraLives(), 1);
     }
     @Test
     public void moveRight() {
-        Level level = new Level();
+        Level level = new Level("bla");
         Player player = new Player(position, "name", 10, 3, 2, 5);
         player.moveRight(level);
         Point newPoint = new Point(2,1);
@@ -174,6 +173,6 @@ public class PlayerTest {
         Player player = new Player(position, "Player1", 8, 3, 2,5 );
         Monster monster = new Monster(position, "Monster1", 10, 3, 2, 5);
         player.takeDamage(3);
-        Assertions.assertEquals(player.getHealthPoints(), 2);
+        assertEquals(player.getHealthPoints(), 2);
     }
 }

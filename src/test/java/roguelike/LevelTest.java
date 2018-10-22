@@ -19,6 +19,7 @@ public class LevelTest {
 	@Test
 	void getNameOfLevel() {
 		assertEquals(level.getName(), levelName);
+	}
 	
 	@Test
 	void setPositionsOnNewlyCreatedLevel() {
@@ -30,7 +31,7 @@ public class LevelTest {
 	@Test
 	void placeEntityOnLocation() {
 		Point point = new Point(2,2);
-		Actor actor = new Actor(point, "name", 10, 3, 2);
+		Actor actor = new Actor(point, "name", 10, 3, 2, 5);
 		
 		level.addPosition(point);
 		level.placeEntity(actor, point);
@@ -40,7 +41,7 @@ public class LevelTest {
 	
 	@Test
 	void placeEntityOnNonExistantLocation() {
-		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2);
+		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
 		
 		Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
 			level.placeEntity(actor, new Point(2,2));
@@ -50,8 +51,8 @@ public class LevelTest {
 	
 	@Test
 	void placeEntityOnTakenLocation() {
-		Actor actor1 = new Actor(new Point(1, 1), "name", 10, 3, 2);
-		Actor actor2 = new Actor(new Point(1, 1), "name", 10, 3, 2);
+		Actor actor1 = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
+		Actor actor2 = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
 		Point point = new Point(1,1);
 		
 		level.addPosition(point);
@@ -65,7 +66,7 @@ public class LevelTest {
 	
 	@Test
 	void getEntityFromPosition() {
-		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2);
+		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
 		Point point = new Point(1,1);
 		
 		level.addPosition(point);
@@ -87,7 +88,7 @@ public class LevelTest {
 	
 	@Test
 	void moveEntityUp() {
-		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2);
+		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
 		
 		level.addPosition(new Point(1, 1));
 		level.addPosition(new Point(1, 2));
@@ -99,7 +100,7 @@ public class LevelTest {
 	
 	@Test 
 	void moveEntityToNonExistingPosition() {
-		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2);
+		Actor actor = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
 		
 		level.addPosition(new Point(1, 1));
 		level.addPosition(new Point(1, 2));
@@ -110,8 +111,8 @@ public class LevelTest {
 	
 	@Test
 	void moveEntityToTakenLocation() {
-		Actor actor1 = new Actor(new Point(1, 1), "name", 10, 3, 2);
-		Actor actor2 = new Actor(new Point(2, 1), "name", 10, 3, 2);
+		Actor actor1 = new Actor(new Point(1, 1), "name", 10, 3, 2, 5);
+		Actor actor2 = new Actor(new Point(2, 1), "name", 10, 3, 2, 5);
 		
 		level.addPosition(new Point(1, 1));
 		level.addPosition(new Point(2, 1));
