@@ -58,7 +58,6 @@ public class LevelTest {
 		});
 		assertEquals(exception.getMessage(), "Point is taken.");
 	}
-	
 	@Test
 	void getEntityFromPosition() {
 		Entity entity = new Entity(new Point(1, 1));

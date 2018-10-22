@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import com.google.common.collect.*;
 public class Level {
+	public static final int WIDTH = 50;
+	public static final int HEIGHT = 40;
 	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
-	private HashSet<Point> positions = new HashSet<>();
+	public static HashSet<Point> positions = new HashSet<>();
 	
 	public Level() {
 		
