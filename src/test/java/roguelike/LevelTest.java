@@ -1,11 +1,11 @@
 package roguelike;
 
-import static org.junit.jupiter.api.Assertions.*;
-import java.awt.Point;
-import java.util.HashSet;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LevelTest {
 	String levelName = "Cellar 1-1";

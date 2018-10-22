@@ -12,10 +12,6 @@ public class Player extends Actor {
         super(position, name, healthPoints, speed, intelligence, strength);
     }
 
-	public String getStats() {
-		return "healthPoints: " + getHealthPoints() + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence() + "\nStrength: " + getStrength();
-	}
-
 	public boolean addItemToInventory(Item item) {
 		if (items.size() < 30) {
 			items.add(item);

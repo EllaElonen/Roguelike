@@ -29,18 +29,6 @@ public class PlayerTest {
 		Player testPlayer2 = new Player(position, "name", 10, 9, 4, 10);
 		assertNotEquals(testPlayer1, testPlayer2);
 	}
-	
-	@Test
-	void listStats() {
-		int healthPoints = 10;
-		int speed = 5;
-		int intelligence = 7;
-		int strength = 5;
-		Player player = new Player(position, "name", healthPoints, speed, intelligence, strength);
-
-		assertEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence + "\nStrength: " + strength);
-
-    }
 
 	void testAddItemToInventory_returnsAddedItem() {
 		testPlayer.addItemToInventory(testItem);
