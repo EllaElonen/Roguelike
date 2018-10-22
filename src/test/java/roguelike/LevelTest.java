@@ -19,7 +19,6 @@ public class LevelTest {
 	@Test
 	void getNameOfLevel() {
 		assertEquals(level.getName(), levelName);
-	}
 	
 	@Test
 	void setPositionsOnNewlyCreatedLevel() {

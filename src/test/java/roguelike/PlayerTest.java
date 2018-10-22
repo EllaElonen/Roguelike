@@ -23,21 +23,6 @@ public class PlayerTest {
 	}
 
 	@Test
-	void setupPlayerObject() throws Exception {
-		assertNotNull(testPlayer, "This object should not be null");
-	}
-
-	@Test
-	void nonEqualObjects() {
-
-		Player testPlayer1 = new Player(position, "name", 10, 3, 2);
-
-		Player testPlayer2 = new Player(position, "name", 10, 3, 2);
-
-		assertNotEquals(testPlayer, testPlayer2);
-	}
-
-	@Test
 
 	void nonEqualStats() {
 		Player testPlayer1 = new Player(position, "name", 10, 9, 4);
@@ -53,11 +38,7 @@ public class PlayerTest {
 		Player player = new Player(position, "name", healthPoints, speed, intelligence);
 		assertNotEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
 
- }
-
-
-	
-
+    }
 
 	void testAddItemToInventory_returnsAddedItem() {
 		testPlayer.addItemToInventory(testItem);
@@ -70,9 +51,9 @@ public class PlayerTest {
 	void testAddItemToInventory_addsOnlyOneItem() {
 		testPlayer.addItemToInventory(testItem);
 
-		assertEquals(1, testPlayer.getInventorySize());// det rätta förväntade
-														// värdet skrivs som
-														// första parametern
+		assertEquals(1, testPlayer.getInventorySize());// det rï¿½tta fï¿½rvï¿½ntade
+														// vï¿½rdet skrivs som
+														// fï¿½rsta parametern
 
 	}
 
@@ -114,5 +95,85 @@ public class PlayerTest {
 
 	}
 
+	private Point position = new Point(1, 1);
 
+	@Test
+	void setupPlayerObject() {
+		Player testPlayer = new Player(position, "name", 10, 3, 2, 5);
+		assertNotNull(testPlayer, "This object should not be null");
+	}
+
+	@Test
+    public void nonEqualObjects(){
+		Player testPlayer1 = new Player(position, "name", 10, 3, 2, 5);
+		Player testPlayer2 = new Player(position, "name", 10, 3, 2, 5);
+		assertNotEquals(testPlayer1, testPlayer2);
+	}
+
+    @Test
+    void moveUp() {
+	    Level level = new Level();
+        Player player = new Player(position, "name", 10, 3, 2, 5);
+        Point newPoint = new Point(1,2);
+        player.moveUp(level);
+        assertEquals(player.position, newPoint);
+    }
+
+    @Test
+    public void moveDown() {
+        Level level = new Level();
+        Player player = new Player(position, "name", 10, 3, 2, 5);
+        Point newPoint = new Point(1,0);
+        player.moveDown(level);
+        assertEquals(player.position, newPoint);
+    }
+
+    @Test
+    public void moveLeft() {
+        Level level = new Level();
+        Player player = new Player(position, "name", 10, 3, 2, 5);
+        player.moveLeft(level);
+        Point newPoint = new Point(0, 1);
+        assertEquals(player.position, newPoint);
+    }
+
+    @Test
+    public void addExtraLives(){
+	    Player player = new Player(position, "name", 10, 3, 2, 5);
+	    player.addExtraLives(1);
+        Assertions.assertEquals(player.getExtraLives(), 1);
+    }
+    @Test
+    public void moveRight() {
+        Level level = new Level();
+        Player player = new Player(position, "name", 10, 3, 2, 5);
+        player.moveRight(level);
+        Point newPoint = new Point(2,1);
+        assertEquals(player.position, newPoint);
+    }
+
+    @Test
+    void attackWeakerMonster(){
+        Player player = new Player(position, "player", 10, 3, 2, 5);
+        Monster monster = new Monster(position, "Monster1", 8, 3, 2, 5);
+        player.takeDamage(3);
+        assertEquals(player.getHealthPoints(), 8);
+
+    }
+
+    @Test
+    void attackEqualMonster(){
+        Player player = new Player(position, "Player1", 10, 3, 2, 5);
+        Monster monster = new Monster(position, "Monster1", 10, 3, 2, 5);
+        player.takeDamage(3);
+        assertEquals(player.getHealthPoints(), 6);
+    }
+
+    @Test
+    void attackStrongerMonster(){
+        Player player = new Player(position, "Player1", 8, 3, 2,5 );
+        Monster monster = new Monster(position, "Monster1", 10, 3, 2, 5);
+        player.takeDamage(3);
+        Assertions.assertEquals(player.getHealthPoints(), 2);
+    }
 }

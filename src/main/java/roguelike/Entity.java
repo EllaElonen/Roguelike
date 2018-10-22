@@ -6,7 +6,7 @@ import java.util.UUID;
 public abstract class Entity {
 
     private String uniqueID;
-    private Point position;
+    Point position;
 
     public Entity(Point position){
         this(position, UUID.randomUUID().toString());
@@ -25,9 +25,7 @@ public abstract class Entity {
     public boolean equals(Object obj) {
         if (obj instanceof Entity){
             Entity entity = (Entity) obj;
-            if (this.uniqueID == entity.uniqueID){
-                return true;
-            }
+            return this.uniqueID == entity.uniqueID;
         }
         return false;
     }
