@@ -20,6 +20,7 @@ public class Actor extends Entity {
         this.speed = speed;
         this.intelligence = intelligence;
     }
+    
 	public String getSpeed() {
 		return null;
 	}
@@ -31,4 +32,9 @@ public class Actor extends Entity {
 	public String getHealthPoints() {
 		return null;
 	}
+
+    
+    public void onContact(Entity entity, Level level) {
+
+    }
 }
