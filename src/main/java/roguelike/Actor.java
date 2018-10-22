@@ -23,7 +23,7 @@ public class Actor extends Entity {
 	public String getSpeed() {
 		return null;
 	}
-
+	
 	public String getIntelligence() {
 		return null;
 	}

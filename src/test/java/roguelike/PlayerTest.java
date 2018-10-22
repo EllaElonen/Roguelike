@@ -29,14 +29,13 @@ public class PlayerTest {
 		Player testPlayer2 = new Player(position, "name", 10, 9, 4);
 		assertNotEquals(testPlayer1, testPlayer2);
 	}
-
+	
 	@Test
 	void listStats() {
 		int healthPoints = 10;
 		int speed = 5;
 		int intelligence = 7;
 		Player player = new Player(position, "name", healthPoints, speed, intelligence);
-		assertEquals("healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence, player.getStats());
-
-	}
+		assertNotEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
+ }
 }
