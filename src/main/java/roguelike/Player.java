@@ -5,10 +5,9 @@ import java.awt.Point;
 public class Player extends Actor {
 
     private int extraLives;
-    private int magicPoints;
 
-	public Player(Point position, String name, int healthPoints, int speed, int intelligence) {
-		super(position, name, healthPoints, speed, intelligence);
+	public Player(Point position, String name, int healthPoints, int speed, int intelligence, int strength) {
+		super(position, name, healthPoints, speed, intelligence, strength);
 	}
 
 	public void moveUp(Level level) {
@@ -49,20 +48,5 @@ public class Player extends Actor {
 
     public void addExtraLives(int amount){
 	    extraLives = extraLives + amount;
-    }
-
-    public void attack(Monster monster){
-        position = monster.getPosition();
-            if (monster.getHealthPoints() > healthPoints){
-                healthPoints = healthPoints - 6;
-            }
-            else if(monster.getHealthPoints() == healthPoints){
-                healthPoints = healthPoints - 4;
-            }
-            else{
-                healthPoints = healthPoints -2;
-            }
-            //TODO If the player has magic abilities or items
-
     }
 }

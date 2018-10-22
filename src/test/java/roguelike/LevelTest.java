@@ -12,7 +12,7 @@ public class LevelTest {
 	Level level;
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() {
 		level = new Level();
 	}
 	

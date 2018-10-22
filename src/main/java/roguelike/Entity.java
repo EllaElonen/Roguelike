@@ -25,9 +25,7 @@ public class Entity {
     public boolean equals(Object obj) {
         if (obj instanceof Entity){
             Entity entity = (Entity) obj;
-            if (this.uniqueID == entity.uniqueID){
-                return true;
-            }
+            return this.uniqueID == entity.uniqueID;
         }
         return false;
     }
