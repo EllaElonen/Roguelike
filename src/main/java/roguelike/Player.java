@@ -13,4 +13,10 @@ public class Player extends Actor {
 		double newY = getPosition().getY() + 1.0;
 		Point newPoint = new Point((int) newX, (int) newY);
 	}
+
+	public String getStats() {
+		return "healthPoints: " + getHealthPoints() + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence();
+	}
+
+
 }

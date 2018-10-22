@@ -20,4 +20,15 @@ public class Actor extends Entity {
         this.speed = speed;
         this.intelligence = intelligence;
     }
+	public String getSpeed() {
+		return null;
+	}
+
+	public String getIntelligence() {
+		return null;
+	}
+
+	public String getHealthPoints() {
+		return null;
+	}
 }
