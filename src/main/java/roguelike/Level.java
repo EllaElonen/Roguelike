@@ -34,6 +34,10 @@ public class Level {
 		entityLocations.put(entity, point);
 	}
 	
+	public void removeEntity(Entity entity) {
+		entityLocations.remove(entity);
+	}
+	
 	public Point getEntityPlacement(Entity entity) {
 		return entityLocations.get(entity);
 	}
@@ -77,6 +81,10 @@ public class Level {
 	
 	public HashSet<Point> getPositions() {
 		return positions;
+	}
+	
+	public boolean entityExists(Entity entity) {
+		return entityLocations.containsValue(entity);
 	}
 	
 	public String getName() {

@@ -122,4 +122,33 @@ public class LevelTest {
 		
 		assertEquals(level.getEntityPlacement(actor1), new Point(1, 1));
 	}
+	
+	@Test
+	void walkOverItem() {
+		Actor player = new Player(new Point(1, 1), "name", 10, 3, 2, 5);
+		Item item = new Item(new Point(2, 1), "Pilbåge");
+		
+		level.addPosition(new Point(1, 1));
+		level.addPosition(new Point(2, 1));
+		level.placeEntity(player, new Point(1, 1));
+		level.placeEntity(item, new Point(2, 1));
+		
+		level.moveEntity(player, Direction.RIGHT);
+		assertEquals(new Point(1, 1), level.getEntityPlacement(player));
+		assertEquals(null, level.getEntityInLocation(new Point(2, 1)));
+	}
+	
+	@Test
+	void walkOverActor() {
+		Actor player = new Player(new Point(1, 1), "name", 10, 3, 2, 5);
+		Actor opponent = new Actor(new Point(2, 1), "name", 10 ,3 ,2, 10);
+		
+		level.addPosition(new Point(1, 1));
+		level.addPosition(new Point(2, 1));
+		level.placeEntity(player, new Point(1, 1));
+		level.placeEntity(opponent, new Point(2, 1));
+		
+		level.moveEntity(player, Direction.RIGHT);
+		assertFalse(level.entityExists(player));
+	}
 }

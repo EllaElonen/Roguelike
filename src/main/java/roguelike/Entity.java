@@ -31,4 +31,5 @@ public abstract class Entity {
     }
     
     public abstract void onContact(Entity entity, Level level);
+    
  }

@@ -46,15 +46,34 @@ public class Actor extends Entity {
 
     }
     
-	public String getSpeed() {
-		return null;
+	public int getSpeed() {
+		return speed;
 	}
 	
-	public String getIntelligence() {
-		return null;
+	public int getIntelligence() {
+		return intelligence;
 	}
 
     public void onContact(Entity entity, Level level) {
-
+    		if (entity instanceof Actor) {
+    			Actor opponent = (Actor)entity;
+    			tradeBlows(opponent);
+    			
+    			if(!opponent.isAlive()) {
+    				level.removeEntity(opponent);
+    			}
+    			if(!isAlive()) {
+    				level.removeEntity(this);
+    			}
+    		}
+    }
+    
+    private void tradeBlows(Actor opponent) {
+    	opponent.takeDamage(calculateDamage());
+		takeDamage(opponent.calculateDamage());
+    }
+    
+    public boolean isAlive() {
+    		return healthPoints > 0;
     }
 }

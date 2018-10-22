@@ -19,7 +19,7 @@ public class PlayerTest {
 	void setUp() throws Exception {
 		testPlayer = new Player(position, "name", 10, 3, 2, 10);
 		position = new Point(1, 1);
-		testItem = new Item("testName");
+		testItem = new Item(new Point(1, 1), "testName");
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class PlayerTest {
 		int intelligence = 7;
 		int strength = 5;
 		Player player = new Player(position, "name", healthPoints, speed, intelligence, strength);
-		assertNotEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
+		assertEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence);
 
     }
 
@@ -60,8 +60,8 @@ public class PlayerTest {
 
 	@Test
 	void testGetAllItemsFromInventory() {
-		Item testItem2 = new Item("Candy");
-		Item testItem3 = new Item("Shield");
+		Item testItem2 = new Item(new Point(1, 1), "Candy");
+		Item testItem3 = new Item(new Point(1, 1), "Shield");
 
 		testPlayer.addItemToInventory(testItem);
 		testPlayer.addItemToInventory(testItem2);
@@ -76,7 +76,7 @@ public class PlayerTest {
 	@Test
 	void testAddTooManyItemsToInventory() {
 		for (int index = 0; index < 30; index++) {
-			assertTrue(testPlayer.addItemToInventory(new Item("Weapon" + index)));
+			assertTrue(testPlayer.addItemToInventory(new Item(new Point(1,1), "Weapon" + index)));
 		}
 		assertFalse(testPlayer.addItemToInventory(testItem), "Exceeded item limit");
 
@@ -84,7 +84,7 @@ public class PlayerTest {
 
 	@Test
 	void testThatItemWasDropped() {
-		Item testItem2 = new Item("Candy");
+		Item testItem2 = new Item(new Point(1, 1), "Candy");
 
 		testPlayer.addItemToInventory(testItem);
 		testPlayer.addItemToInventory(testItem2);
@@ -156,7 +156,7 @@ public class PlayerTest {
         Player player = new Player(position, "player", 10, 3, 2, 5);
         Monster monster = new Monster(position, "Monster1", 8, 3, 2, 5);
         player.takeDamage(3);
-        assertEquals(player.getHealthPoints(), 8);
+        assertEquals(player.getHealthPoints(), 7);
 
     }
 
@@ -165,7 +165,7 @@ public class PlayerTest {
         Player player = new Player(position, "Player1", 10, 3, 2, 5);
         Monster monster = new Monster(position, "Monster1", 10, 3, 2, 5);
         player.takeDamage(3);
-        assertEquals(player.getHealthPoints(), 6);
+        assertEquals(player.getHealthPoints(), 7);
     }
 
     @Test
@@ -173,6 +173,6 @@ public class PlayerTest {
         Player player = new Player(position, "Player1", 8, 3, 2,5 );
         Monster monster = new Monster(position, "Monster1", 10, 3, 2, 5);
         player.takeDamage(3);
-        assertEquals(player.getHealthPoints(), 2);
+        assertEquals(player.getHealthPoints(), 5);
     }
 }
