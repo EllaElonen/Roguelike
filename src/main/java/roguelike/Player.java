@@ -73,6 +73,7 @@ public class Player extends Actor {
 				}
 			}
 			intelligence -= 2;
+		
 			return p;
 		} else {
 			return null;
