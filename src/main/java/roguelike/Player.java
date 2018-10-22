@@ -13,7 +13,7 @@ public class Player extends Actor {
     }
 
 	public String getStats() {
-		return "healthPoints: " + getHealthPoints() + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence();
+		return "healthPoints: " + getHealthPoints() + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence() + "\nStrength: " + getStrength();
 	}
 
 	public boolean addItemToInventory(Item item) {

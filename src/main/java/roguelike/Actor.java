@@ -46,14 +46,14 @@ public class Actor extends Entity {
 
     }
     
-	public String getSpeed() {
-		return null;
+	public int getSpeed() {
+		return speed;
 	}
 	
-	public String getIntelligence() {
-		return null;
+	public int getIntelligence() {
+		return intelligence;
 	}
-
+	
     public void onContact(Entity entity, Level level) {
 
     }
