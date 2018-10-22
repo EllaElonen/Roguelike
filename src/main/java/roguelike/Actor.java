@@ -13,13 +13,28 @@ public class Actor extends Entity {
 		this(position, name, healthPoints, speed, intelligence, UUID.randomUUID().toString());
 	}
 
-	public Actor(Point position, String name, int healthPoints, int speed, int intelligence, String id) {
-		super(position, id);
-		this.name = name;
-		this.healthPoints = healthPoints;
-		this.speed = speed;
-		this.intelligence = intelligence;
+	
+    public Actor(Point position, String name, int healthPoints, int speed,int  intelligence, String id) {
+        super(position, id);
+        this.name = name;
+        this.healthPoints = healthPoints;
+        this.speed = speed;
+        this.intelligence = intelligence;
+    }
+    
+	public String getSpeed() {
+		return null;
+	}
+	
+	public String getIntelligence() {
+		return null;
 	}
 
-	
-}
+	public String getHealthPoints() {
+		return null;
+	}
+
+    
+    public void onContact(Entity entity, Level level) {
+
+    }}

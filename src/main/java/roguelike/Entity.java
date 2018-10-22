@@ -3,7 +3,7 @@ package roguelike;
 import java.awt.*;
 import java.util.UUID;
 
-public class Entity {
+public abstract class Entity {
 
     private String uniqueID;
     protected Point position;
@@ -31,4 +31,6 @@ public class Entity {
         }
         return false;
     }
-}
+    
+    public abstract void onContact(Entity entity, Level level);
+ }
