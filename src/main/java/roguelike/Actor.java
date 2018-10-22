@@ -53,7 +53,7 @@ public class Actor extends Entity {
 	public int getIntelligence() {
 		return intelligence;
 	}
-
+	
     public void onContact(Entity entity, Level level) {
     		if (entity instanceof Actor) {
     			Actor opponent = (Actor)entity;
