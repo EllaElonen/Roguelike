@@ -20,4 +20,8 @@ public class Actor extends Entity {
         this.speed = speed;
         this.intelligence = intelligence;
     }
+    
+    public void onContact(Entity entity, Level level) {
+
+    }
 }

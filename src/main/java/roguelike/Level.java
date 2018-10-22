@@ -61,7 +61,10 @@ public class Level {
 				default:
 					newPoint = oldPoint;
 			}
-			if (positionAvailable(newPoint)) {
+			Entity entityInSpot = entityLocations.inverse().get(newPoint);
+			if (entityInSpot != null) {
+				entityInSpot.onContact(entity, this);
+			} else if (positionAvailable(newPoint)){
 				entityLocations.put(entity, newPoint);
 			}
 		}
