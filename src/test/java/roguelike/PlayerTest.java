@@ -86,6 +86,13 @@ public class PlayerTest {
 		assertEquals(inventoryBefore, testPlayer.getInventorySize() + 1);
 
 	}
+	
+	@Test
+	void testDropNonExistantItem(){
+		int inventoryBefore = testPlayer.getInventorySize();
+		
+		assertFalse(testPlayer.dropItemFromInventory(testItem));
+	}
 
 	@Test
 	void setupPlayerObject() {
