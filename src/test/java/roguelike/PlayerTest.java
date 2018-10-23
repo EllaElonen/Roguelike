@@ -20,7 +20,7 @@ public class PlayerTest {
 
 		testPlayer = new Player(position, "name", 10, 3, 2, 10);
 		position = new Point(1, 1);
-		testItem = new Item(new Point(1, 1), "testName", EquipmentSlot.WEAPON);
+		testItem = new Item(new Point(1, 1), "testName", EquipmentSlot.WEAPON, 0, 0);
 	}
 
 	@Test
@@ -51,8 +51,8 @@ public class PlayerTest {
 
 	@Test
 	void testGetAllItemsFromInventory() {
-		Item testItem2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.TORSO);
-		Item testItem3 = new Item(new Point(1, 1), "Shield", EquipmentSlot.SHIELD);
+		Item testItem2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.TORSO, 0, 0);
+		Item testItem3 = new Item(new Point(1, 1), "Shield", EquipmentSlot.SHIELD, 0, 0);
 
 		testPlayer.addItemToInventory(testItem);
 		testPlayer.addItemToInventory(testItem2);
@@ -67,7 +67,7 @@ public class PlayerTest {
 	@Test
 	void testAddTooManyItemsToInventory() {
 		for (int index = 0; index < 30; index++) {
-			assertTrue(testPlayer.addItemToInventory(new Item(new Point(1,1), "Weapon" + index, EquipmentSlot.WEAPON)));
+			assertTrue(testPlayer.addItemToInventory(new Item(new Point(1,1), "Weapon" + index, EquipmentSlot.WEAPON,0 ,0)));
 		}
 		assertFalse(testPlayer.addItemToInventory(testItem), "Exceeded item limit");
 
@@ -75,7 +75,7 @@ public class PlayerTest {
 
 	@Test
 	void testThatItemWasDropped() {
-		Item testItem2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET);
+		Item testItem2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET, 0, 0);
 
 		testPlayer.addItemToInventory(testItem);
 		testPlayer.addItemToInventory(testItem2);
@@ -182,8 +182,8 @@ public class PlayerTest {
     
     @Test
     void switchEquipedHelmets() {
-    	Item helmet1 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET);
-    	Item helmet2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET);
+    	Item helmet1 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET, 0, 0);
+    	Item helmet2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET, 0, 0);
     	
     	testPlayer.addItemToInventory(helmet1);
     	testPlayer.addItemToInventory(helmet2);
@@ -192,5 +192,16 @@ public class PlayerTest {
     	testPlayer.equip(helmet2); //testItem has helmet
     	
     	assertEquals(helmet2, testPlayer.getSlot(EquipmentSlot.HELMET));
+    }
+    
+    @Test 
+    void attackWithWeapon() {
+    	Item weapon = new Item(new Point(1, 1), "testName", EquipmentSlot.WEAPON, 5, 0);
+    	Actor actor = new Actor(position, "name", 20, 10, 10, 1);
+    	Level level = new Level("level");
+    	testPlayer.addItemToInventory(weapon);
+    	testPlayer.equip(weapon);
+    	actor.onContact(testPlayer,level);
+    	assertEquals(5, actor.getHealthPoints());
     }
 }

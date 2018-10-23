@@ -52,7 +52,7 @@ public class Actor extends Entity {
         return strength;
     }
 
-    private int calculateDamage(){
+    public int calculateDamage(){
         return strength;
     }
 

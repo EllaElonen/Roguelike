@@ -99,4 +99,14 @@ public class Player extends Actor {
 		return equipment.get(slot);
 		
 	}
+	
+	public int calculateDamage(){	
+		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
+		int damage = strength;
+		if (equipedWeapon != null) {
+			damage += equipedWeapon.getPlusDamage();
+		}
+			
+        return damage;
+    }
 }

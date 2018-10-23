@@ -126,7 +126,7 @@ public class LevelTest {
 	@Test
 	void walkOverItem() {
 		Actor player = new Player(new Point(1, 1), "name", 10, 3, 2, 5);
-		Item item = new Item(new Point(2, 1), "Pilbåge", EquipmentSlot.WEAPON);
+		Item item = new Item(new Point(2, 1), "Pilbåge", EquipmentSlot.WEAPON, 0, 0);
 		
 		level.addPosition(new Point(1, 1));
 		level.addPosition(new Point(2, 1));
