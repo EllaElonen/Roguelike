@@ -1,12 +1,14 @@
 package roguelike;
 
 import java.awt.Point;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Player extends Actor {
 
 	private HashSet<Item> items = new HashSet<>();
     private int extraLives;
+    private HashMap<EquipmentSlot, Item> equipment = new HashMap<>();
 
     public Player(Point position, String name, int healthPoints, int speed, int intelligence, int strength) {
         super(position, name, healthPoints, speed, intelligence, strength);
@@ -86,4 +88,15 @@ public class Player extends Actor {
     public void addExtraLives(int amount){
 	    extraLives = extraLives + amount;
     }
+
+	public void equip(Item testItem) {
+		if (itemExistsInInventory(testItem)) 
+			equipment.put(testItem.getSlot(), testItem);
+	
+	}
+
+	public Item getSlot(EquipmentSlot slot) {
+		return equipment.get(slot);
+		
+	}
 }

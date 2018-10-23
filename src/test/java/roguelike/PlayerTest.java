@@ -1,13 +1,13 @@
 package roguelike;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
-
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.awt.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 
@@ -17,9 +17,10 @@ public class PlayerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+
 		testPlayer = new Player(position, "name", 10, 3, 2, 10);
 		position = new Point(1, 1);
-		testItem = new Item(new Point(1, 1), "testName");
+		testItem = new Item(new Point(1, 1), "testName", EquipmentSlot.WEAPON);
 	}
 
 	@Test
@@ -30,6 +31,7 @@ public class PlayerTest {
 		assertNotEquals(testPlayer1, testPlayer2);
 	}
 
+	@Test
 	void testAddItemToInventory_returnsAddedItem() {
 		testPlayer.addItemToInventory(testItem);
 
@@ -49,8 +51,8 @@ public class PlayerTest {
 
 	@Test
 	void testGetAllItemsFromInventory() {
-		Item testItem2 = new Item(new Point(1, 1), "Candy");
-		Item testItem3 = new Item(new Point(1, 1), "Shield");
+		Item testItem2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.TORSO);
+		Item testItem3 = new Item(new Point(1, 1), "Shield", EquipmentSlot.SHIELD);
 
 		testPlayer.addItemToInventory(testItem);
 		testPlayer.addItemToInventory(testItem2);
@@ -65,7 +67,7 @@ public class PlayerTest {
 	@Test
 	void testAddTooManyItemsToInventory() {
 		for (int index = 0; index < 30; index++) {
-			assertTrue(testPlayer.addItemToInventory(new Item(new Point(1,1), "Weapon" + index)));
+			assertTrue(testPlayer.addItemToInventory(new Item(new Point(1,1), "Weapon" + index, EquipmentSlot.WEAPON)));
 		}
 		assertFalse(testPlayer.addItemToInventory(testItem), "Exceeded item limit");
 
@@ -73,7 +75,7 @@ public class PlayerTest {
 
 	@Test
 	void testThatItemWasDropped() {
-		Item testItem2 = new Item(new Point(1, 1), "Candy");
+		Item testItem2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET);
 
 		testPlayer.addItemToInventory(testItem);
 		testPlayer.addItemToInventory(testItem2);
@@ -163,5 +165,32 @@ public class PlayerTest {
         Monster monster = new Monster(position, "Monster1", 10, 3, 2, 5);
         player.takeDamage(3);
         assertEquals(player.getHealthPoints(), 5);
+    }
+    
+    @Test
+    void equipWithWeapon(){
+    	testPlayer.addItemToInventory(testItem);
+    	testPlayer.equip(testItem);//testItem has slot weapon
+    	assertEquals(testItem, testPlayer.getSlot(EquipmentSlot.WEAPON));
+    }
+    
+    @Test
+    void equipWithNonexistentItem() {
+    	testPlayer.equip(testItem);//testItem has slot weapon
+    	assertNull(testPlayer.getSlot(EquipmentSlot.WEAPON));
+    }
+    
+    @Test
+    void switchEquipedHelmets() {
+    	Item helmet1 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET);
+    	Item helmet2 = new Item(new Point(1, 1), "Candy", EquipmentSlot.HELMET);
+    	
+    	testPlayer.addItemToInventory(helmet1);
+    	testPlayer.addItemToInventory(helmet2);
+    	
+    	testPlayer.equip(helmet1);
+    	testPlayer.equip(helmet2); //testItem has helmet
+    	
+    	assertEquals(helmet2, testPlayer.getSlot(EquipmentSlot.HELMET));
     }
 }
