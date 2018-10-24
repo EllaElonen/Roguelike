@@ -62,7 +62,7 @@ public class Actor extends Entity {
         //TODO If the player has magic abilities or items
 
     }
-    
+  
     public String getStats() {
 		return "healthPoints: " + getHealthPoints() + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence() + "\nStrength: " + getStrength();
 	}

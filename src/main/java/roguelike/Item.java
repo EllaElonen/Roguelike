@@ -35,4 +35,8 @@ public class Item extends Entity{
 			level.removeEntity(this);
 		}
 	}
+
+	public int getPlusDefense() {
+		return plusDefense;
+	}
 }
