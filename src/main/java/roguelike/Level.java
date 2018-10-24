@@ -47,6 +47,7 @@ public class Level {
 	}
 	
 	public void moveEntity(Entity entity, Direction direction) {
+		System.out.println(entity);
 		Point oldPoint = entityLocations.get(entity);
 		if (oldPoint != null) {
 			Point newPoint;

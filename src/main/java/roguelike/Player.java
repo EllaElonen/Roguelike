@@ -13,7 +13,18 @@ public class Player extends Actor {
     public Player(Point position, String name, int healthPoints, int speed, int intelligence, int strength) {
         super(position, name, healthPoints, speed, intelligence, strength);
     }
-
+    public int calculateDefense() {
+    	int i = 0;
+    	for(Item item: equipment.values()) {
+    		i+=item.getPlusDefense();
+    	}
+    	return i;
+    }
+    public void takeDamage(int damage) {
+    	int effectiveDamage=damage-calculateDefense()/2;
+    	setHealthPoints(healthPoints-effectiveDamage);
+    	 
+    }
 	public boolean addItemToInventory(Item item) {
 		if (items.size() < 30) {
 			items.add(item);
@@ -99,4 +110,14 @@ public class Player extends Actor {
 		return equipment.get(slot);
 		
 	}
+	
+	public int calculateDamage(){	
+		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
+		int damage = strength;
+		if (equipedWeapon != null) {
+			damage += equipedWeapon.getPlusDamage();
+		}
+			
+        return damage;
+    }
 }
