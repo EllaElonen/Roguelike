@@ -6,19 +6,20 @@ import java.util.UUID;
 public abstract class Entity {
 
     private String uniqueID;
-    Point position;
+  //  private Level level;
+   protected Level level;
 
-    public Entity(Point position){
-        this(position, UUID.randomUUID().toString());
+    public Entity(Level level){
+        this(level, UUID.randomUUID().toString());
     }
 
-    public Entity(Point point, String uniqueID){
-        this.position = point;
+    public Entity(Level level, String uniqueID){
+        this.level = level;
         this.uniqueID = uniqueID;
     }
 
-    public Point getPosition(){
-        return position;
+    public Level getLevel(){
+        return level;
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.google.common.collect.HashBiMap;
 import java.awt.*;
 import java.util.HashSet;
 public class Level {
+	public static int WIDTH=50;
+	public static int HEIGHT=40;
 	private String name;
 	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
 
@@ -47,7 +49,6 @@ public class Level {
 	}
 	
 	public void moveEntity(Entity entity, Direction direction) {
-		System.out.println(entity);
 		Point oldPoint = entityLocations.get(entity);
 		if (oldPoint != null) {
 			Point newPoint;
@@ -76,7 +77,7 @@ public class Level {
 		}
 	}
 	
-	private boolean positionAvailable(Point point) {
+	public boolean positionAvailable(Point point) {
 		return positionExists(point) && entityLocations.inverse().get(point) == null;
 	}
 	

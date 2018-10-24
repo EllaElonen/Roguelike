@@ -8,33 +8,33 @@ import java.awt.Point;
 import org.junit.Test;
 
 public class ActorTest {
-	
-	Point point = new Point(1,1);
+	Level level= new Level("levelName");
+	//Point point = new Point(1,1);
 	
 	@Test
 	public void negativeHP() {
 		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(point, "name", -10, 5, 2, 10);
+			new Actor(level, "name", -10, 5, 2, 10);
 		});
 	}
 	
 	@Test
 	public void negativeStrength() {
 		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(point, "name", 10, 5, 2, -10);
+			new Actor(level, "name", 10, 5, 2, -10);
 		});
 	}
 	
 	@Test
 	public void negativeSpeed() {
 		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(point, "name", 10, -5, 2, 10);
+			new Actor(level, "name", 10, -5, 2, 10);
 		});	}
 	
 	@Test
 	public void negativeIntelligence() {
 		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(point, "name", 10, 5, -2, 10);
+			new Actor(level, "name", 10, 5, -2, 10);
 		});	}
 
 	
@@ -44,7 +44,7 @@ public class ActorTest {
 		int speed = 5;
 		int intelligence = 7;
 		int strength = 5;
-		Player player = new Player(point, "name", healthPoints, speed, intelligence, strength);
+		Player player = new Player(level, "name", healthPoints, speed, intelligence, strength);
 
 		assertEquals(player.getStats(),"healthPoints: " + healthPoints + "\nSpeed: " + speed + "\nIntelligence: " + intelligence + "\nStrength: " + strength);
 

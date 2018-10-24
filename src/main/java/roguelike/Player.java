@@ -3,16 +3,66 @@ package roguelike;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 
 public class Player extends Actor {
 
 	private HashSet<Item> items = new HashSet<>();
     private int extraLives;
     private HashMap<EquipmentSlot, Item> equipment = new HashMap<>();
-
-    public Player(Point position, String name, int healthPoints, int speed, int intelligence, int strength) {
-        super(position, name, healthPoints, speed, intelligence, strength);
+    private HashMap<String, Ability> abilities = new HashMap<>();
+    
+    public Player(Level level, String name, int healthPoints, int speed, int intelligence, int strength) {
+        super(level, name, healthPoints, speed, intelligence, strength);
     }
+//    public Point moveToRandomPlace() {
+//		Point p;
+//		if (intelligence >= 1) {
+//			Random rand = new Random();
+//			int x = rand.nextInt(Level.WIDTH + 1);//om olika nivåer har olika storlek?
+//			int y = rand.nextInt(Level.HEIGHT + 1);//behöver man ta hänsyn till klassen Level?
+//			p = new Point(x, y);
+//			boolean illegalPlace = true;
+//			while (illegalPlace) {
+//				if (!Level.positions.contains(p) && !p.equals(this.level)) {
+//					this.level = p;
+//					illegalPlace = false;
+//				}
+//			}
+//			intelligence--;
+//			return p;
+//		} else {
+//			return this.level;
+//		}
+//	}
+//    public Point[] throwFire() {
+//		if (intelligence >= 2) {
+//			Point[] p = new Point[fireLength];
+//
+//			if (direction==UPWARDS) {
+//				for(int i = 0;i<fireLength;i++) {
+//					p[i]=new Point(level.x,level.y-i-1);
+//				}		
+//			}else if(direction==DOWNWARDS) {
+//				for(int i = 0;i<fireLength;i++) {
+//					p[i]=new Point(level.x,level.y+i+1);
+//				}
+//			}else if(direction==LEFTWARDS) {
+//				for(int i = 0;i<fireLength;i++) {
+//					p[i]=new Point(level.x-i-1,level.y);
+//				}
+//			}else {
+//				for(int i = 0;i<fireLength;i++) {
+//					p[i]=new Point(level.x+i+1,level.y);
+//				}
+//			}
+//			intelligence -= 2;
+//		
+//			return p;
+//		} else {
+//			return null;
+//		}
+//	}
     public int calculateDefense() {
     	int i = 0;
     	for(Item item: equipment.values()) {
@@ -60,37 +110,11 @@ public class Player extends Actor {
 
 	}
 
-	public void moveUp(Level level) {
-		double newX = getPosition().getX();
-		double newY = getPosition().getY() + 1.0;
-		Point newPoint = new Point((int) newX, (int) newY);
-		setPosition(newPoint);
+	public void move(Direction direction) {
+		level.moveEntity(this, direction);
 	}
 
-    public void moveDown(Level level) {
-        double newX = getPosition().getX();
-        double newY = getPosition().getY() - 1.0;
-        Point newPoint = new Point((int) newX, (int) newY);
-        setPosition(newPoint);
-    }
 
-    public void moveLeft(Level level) {
-        double newX = getPosition().getX() - 1.0;
-        double newY = getPosition().getY();
-        Point newPoint = new Point((int) newX, (int) newY);
-        setPosition(newPoint);
-    }
-
-    public void moveRight(Level level) {
-        double newX = getPosition().getX()+ 1.0;
-        double newY = getPosition().getY();
-        Point newPoint = new Point((int) newX, (int) newY);
-        setPosition(newPoint);
-    }
-
-    public void setPosition(Point position){
-	    this.position = position;
-    }
 
     public int getExtraLives(){
 	    return extraLives;

@@ -7,15 +7,15 @@ public class Actor extends Entity {
     private String name;
     protected int healthPoints;
     private int speed;
-    private int intelligence;
+    protected int intelligence;
     protected int strength;
 
-    public Actor(Point position, String name, int healthPoints, int speed,int  intelligence, int strength){
-        this(position, name, healthPoints, speed, intelligence, UUID.randomUUID().toString(), strength);
+    public Actor(Level level, String name, int healthPoints, int speed,int  intelligence, int strength){
+        this(level, name, healthPoints, speed, intelligence, UUID.randomUUID().toString(), strength);
     }
 
-    public Actor(Point position, String name, int healthPoints, int speed,int  intelligence, String id, int strength) {
-        super(position, id);
+    public Actor(Level level, String name, int healthPoints, int speed,int  intelligence, String id, int strength) {
+        super(level, id);
         
         if (healthPoints < 0 || healthPoints > 99) {
         	throw new IllegalArgumentException();

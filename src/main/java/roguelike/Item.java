@@ -8,8 +8,8 @@ public class Item extends Entity{
 	private int plusDamage;
 	private int plusDefense;
 
-	public Item(Point position, String name, EquipmentSlot slot, int plusDamage, int plusDefense) {
-		super(position);
+	public Item(Level level, String name, EquipmentSlot slot, int plusDamage, int plusDefense) {
+		super(level);
 		this.name = name;
 		this.slot = slot;
 		this.plusDamage = plusDamage;
