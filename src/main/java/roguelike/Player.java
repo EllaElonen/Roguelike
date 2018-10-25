@@ -8,7 +8,7 @@ import java.util.Random;
 public class Player extends Actor {
 
 	private HashSet<Item> items = new HashSet<>();
-    private int extraLives;
+    private int lives;
     private HashMap<EquipmentSlot, Item> equipment = new HashMap<>();
     private HashMap<String, Ability> abilities = new HashMap<>();
     
@@ -116,12 +116,12 @@ public class Player extends Actor {
 
 
 
-    public int getExtraLives(){
-	    return extraLives;
+    public int getLives(){
+	    return lives;
     }
 
-    public void addExtraLives(int amount){
-	    extraLives = extraLives + amount;
+    public void addExtraLives(int extraLives){
+	    lives = extraLives + lives;
     }
 
 	public void equip(Item testItem) {

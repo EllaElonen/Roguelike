@@ -16,9 +16,7 @@ public class Item extends Entity{
 		this.plusDefense = plusDefense;
 	}
 	
-	public String getName(){
-		return name;
-	}
+	
 	
 	public EquipmentSlot getSlot() {
 		return slot;

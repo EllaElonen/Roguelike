@@ -127,7 +127,7 @@ public class PlayerTest {
 	public void addExtraLives() {
 		Player player = new Player(level, "name", 10, 3, 2, 5);
 		player.addExtraLives(1);
-		assertEquals(player.getExtraLives(), 1);
+		assertEquals(player.getLives(), 1);
 	}
 
 	

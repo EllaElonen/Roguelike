@@ -13,7 +13,7 @@ public class Teleport implements Ability {
 	public Teleport(String name, int requiredIntelligence) {
 		this.name = name;
 
-		if (requiredIntelligence < 0 || requiredIntelligence > 99) {
+		if (requiredIntelligence <1 || requiredIntelligence > 99) {
 			throw new IllegalArgumentException();
 		}
 		this.requiredIntelligence = requiredIntelligence;

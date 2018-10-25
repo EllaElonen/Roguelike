@@ -29,13 +29,15 @@ public class ActorTest {
 	public void negativeSpeed() {
 		assertThrows (IllegalArgumentException.class, () ->{
 			new Actor(level, "name", 10, -5, 2, 10);
-		});	}
+		});	
+	}
 	
 	@Test
 	public void negativeIntelligence() {
 		assertThrows (IllegalArgumentException.class, () ->{
 			new Actor(level, "name", 10, 5, -2, 10);
-		});	}
+		});	
+	}
 
 	
 	@Test

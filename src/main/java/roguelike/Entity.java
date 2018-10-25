@@ -18,9 +18,6 @@ public abstract class Entity {
         this.uniqueID = uniqueID;
     }
 
-    public Level getLevel(){
-        return level;
-    }
 
     @Override
     public boolean equals(Object obj) {
