@@ -15,6 +15,7 @@ public class Player extends Actor {
     public Player(Level level, String name, int healthPoints, int speed, int intelligence, int strength) {
         super(level, name, healthPoints, speed, intelligence, strength);
     }
+    //kommentar
 //    public Point moveToRandomPlace() {
 //		Point p;
 //		if (intelligence >= 1) {
