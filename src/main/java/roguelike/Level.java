@@ -1,12 +1,15 @@
 package roguelike;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import java.util.ArrayList;
 
 import java.awt.*;
 import java.util.HashSet;
+
 public class Level {
-	public static int WIDTH=50;
-	public static int HEIGHT=40;
+	public static int WIDTH = 50;
+	public static int HEIGHT = 40;
 	private String name;
 	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
 
@@ -19,76 +22,92 @@ public class Level {
 	public void addPosition(Point point) {
 		positions.add(point);
 	}
-	
+
 	public boolean positionExists(Point point) {
 		return positions.contains(point);
 	}
-	
+
 	public void placeEntity(Entity entity, Point point) {
 		if (!positions.contains(point)) {
 			throw new IllegalArgumentException("Level does not have that point.");
 		}
-		
+
 		if (entityLocations.inverse().get(point) != null) {
 			throw new IllegalArgumentException("Point is taken.");
 		}
-		
+
 		entityLocations.put(entity, point);
 	}
-	
+
 	public void removeEntity(Entity entity) {
 		entityLocations.remove(entity);
 	}
-	
+
+	public void emptyPosition(Point point) {
+		entityLocations.inverse().remove(point);
+	}
+
 	public Point getEntityPlacement(Entity entity) {
 		return entityLocations.get(entity);
 	}
-	
+
 	public Entity getEntityInLocation(Point point) {
 		return entityLocations.inverse().get(point);
 	}
-	
+
+	public ArrayList<Point> getAvailablePlaces() {
+		ArrayList<Point> availablePositions = new ArrayList<>();
+		for (Point point : positions) {
+			if (positionAvailable(point)) {
+				availablePositions.add(point);
+
+			}
+
+		}
+		return availablePositions;
+	}
+
 	public void moveEntity(Entity entity, Direction direction) {
 		Point oldPoint = entityLocations.get(entity);
 		if (oldPoint != null) {
 			Point newPoint;
-			switch(direction) {
-				case UP:
-					newPoint = new Point(oldPoint.x, oldPoint.y + 1);
-					break;
-				case DOWN:
-					newPoint = new Point(oldPoint.x, oldPoint.y - 1);
-					break;
-				case RIGHT:
-					newPoint = new Point(oldPoint.x + 1, oldPoint.y);
-					break;
-				case LEFT:
-					newPoint = new Point(oldPoint.x - 1, oldPoint.y);
-					break;
-				default:
-					newPoint = oldPoint;
+			switch (direction) {
+			case UP:
+				newPoint = new Point(oldPoint.x, oldPoint.y + 1);
+				break;
+			case DOWN:
+				newPoint = new Point(oldPoint.x, oldPoint.y - 1);
+				break;
+			case RIGHT:
+				newPoint = new Point(oldPoint.x + 1, oldPoint.y);
+				break;
+			case LEFT:
+				newPoint = new Point(oldPoint.x - 1, oldPoint.y);
+				break;
+			default:
+				newPoint = oldPoint;
 			}
 			Entity entityInSpot = entityLocations.inverse().get(newPoint);
 			if (entityInSpot != null) {
 				entityInSpot.onContact(entity, this);
-			} else if (positionAvailable(newPoint)){
+			} else if (positionAvailable(newPoint)) {
 				entityLocations.put(entity, newPoint);
 			}
 		}
 	}
-	
+
 	public boolean positionAvailable(Point point) {
 		return positionExists(point) && entityLocations.inverse().get(point) == null;
 	}
-	
+
 	public HashSet<Point> getPositions() {
 		return positions;
 	}
-	
+
 	public boolean entityExists(Entity entity) {
 		return entityLocations.containsValue(entity);
 	}
-	
+
 	public String getName() {
 		return name;
 	}
