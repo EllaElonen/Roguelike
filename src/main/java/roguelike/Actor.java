@@ -18,19 +18,19 @@ public class Actor extends Entity {
         super(level, id);
         
         if (healthPoints < 0 || healthPoints > 99) {
-        	throw new IllegalArgumentException();
+        		throw new IllegalArgumentException();
         }
         
         if (strength < 0 || strength > 99) {
-        	throw new IllegalArgumentException();
+        		throw new IllegalArgumentException();
         }
         
         if (speed < 0 || speed > 99) {
-        	throw new IllegalArgumentException();
+        		throw new IllegalArgumentException();
         }
         
         if (intelligence < 0 || intelligence > 99) {
-        	throw new IllegalArgumentException();
+        		throw new IllegalArgumentException();
         }
         
         this.name = name;

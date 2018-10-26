@@ -30,4 +30,8 @@ public class Teleport implements Ability {
 			player.intelligence -= requiredIntelligence;
 		}
 	}
+	
+	public String getName() {
+		return name;
+	}
 }

@@ -160,4 +160,15 @@ public class Player extends Actor {
 	public boolean slotEquiped(EquipmentSlot slot) {
 		return equipment.containsKey(slot);
 	}
+	
+	public void learnAbility(Ability ability) {
+		abilities.put(ability.getName(), ability);
+	}
+	
+	public void castAbility(String abilityName) {
+		Ability ability = abilities.get(abilityName);
+		if (ability != null) {
+			ability.use(this, level);
+		}
+	}
 }

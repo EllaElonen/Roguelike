@@ -21,7 +21,7 @@ public abstract class Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Entity){
+        if (obj instanceof Entity) {
             Entity entity = (Entity) obj;
             return this.uniqueID == entity.uniqueID;
         }
