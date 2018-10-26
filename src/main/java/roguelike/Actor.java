@@ -76,8 +76,8 @@ public class Actor extends Entity {
 	}
 	
     public void onContact(Entity entity, Level level) {
-    		if (entity instanceof Actor) {
-    			Actor opponent = (Actor)entity;
+    		if (entity instanceof Player) {
+    			Player opponent = (Player)entity;
     			tradeBlows(opponent);
     			
     			if(!opponent.isAlive()) {
@@ -89,9 +89,13 @@ public class Actor extends Entity {
     		}
     }
     
-    private void tradeBlows(Actor opponent) {
-    	opponent.takeDamage(calculateDamage());
+    private void tradeBlows(Player opponent) {
+	    	opponent.takeDamage(calculateDamage());
 		takeDamage(opponent.calculateDamage());
+		
+		if (opponent.slotEquiped(EquipmentSlot.HELMET) && opponent.slotEquiped(EquipmentSlot.WEAPON)) {
+			takeDamage(calculateDamage() / 5);
+		}
     }
     
     public boolean isAlive() {

@@ -215,4 +215,69 @@ public class PlayerTest {
 		assertEquals(expectedHealth,testPlayer.getHealthPoints());
 		
 	}
+	
+	@Test
+	void calculateDamageWithWeaponAndLegs() {
+		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);	
+		int expectedDamage = testPlayer.getStrength() + weapon.getPlusDamage() * 2;
+		
+		testPlayer.addItemToInventory(legs);
+		testPlayer.addItemToInventory(weapon);
+		testPlayer.equip(legs);
+		testPlayer.equip(weapon);
+		
+		assertEquals(expectedDamage, testPlayer.calculateDamage());
+	}
+	
+	@Test
+	void calculateDamageWithWeaponAndShield() {
+		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);	
+		int expectedDamage = testPlayer.getStrength() + weapon.getPlusDamage() + shield.getPlusDamage();
+		
+		testPlayer.addItemToInventory(shield);
+		testPlayer.addItemToInventory(weapon);
+		testPlayer.equip(shield);
+		testPlayer.equip(weapon);
+		
+		assertEquals(expectedDamage, testPlayer.calculateDamage());
+	}
+	
+	@Test
+	void takeDamageWithHelmetAndTorsoAndLegs() {
+		Item helmet = new Item(level, "testName", EquipmentSlot.HELMET, 5, 3);
+		Item torso = new Item(level, "testName", EquipmentSlot.TORSO, 5, 2);
+		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);	
+		int damage = 10;
+		int expectedDefense = (helmet.getPlusDefense() + torso.getPlusDefense() + legs.getPlusDefense())/2;
+		int expectedHealth = testPlayer.getHealthPoints() - (damage - (expectedDefense))/2;
+		
+		testPlayer.addItemToInventory(helmet);
+		testPlayer.addItemToInventory(torso);
+		testPlayer.addItemToInventory(legs);
+		testPlayer.equip(helmet);
+		testPlayer.equip(torso);
+		testPlayer.equip(legs);
+		testPlayer.takeDamage(damage);
+		
+		assertEquals(expectedHealth, testPlayer.getHealthPoints());
+	}
+	
+	@Test
+	void calculateDamageWithWeaponAndLegsAndShield() {
+		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
+		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
+		int expectedDamage = testPlayer.getStrength() + weapon.getPlusDamage() * 2 + shield.getPlusDamage();
+		
+		testPlayer.addItemToInventory(shield);
+		testPlayer.addItemToInventory(legs);
+		testPlayer.addItemToInventory(weapon);
+		testPlayer.equip(shield);
+		testPlayer.equip(legs);
+		testPlayer.equip(weapon);
+		
+		assertEquals(expectedDamage, testPlayer.calculateDamage());
+	}
 }

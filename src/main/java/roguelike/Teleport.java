@@ -30,5 +30,4 @@ public class Teleport implements Ability {
 			player.intelligence -= requiredIntelligence;
 		}
 	}
-
 }
