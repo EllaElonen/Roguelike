@@ -20,8 +20,8 @@ public class Player extends Actor {
 //		Point p;
 //		if (intelligence >= 1) {
 //			Random rand = new Random();
-//			int x = rand.nextInt(Level.WIDTH + 1);//om olika nivåer har olika storlek?
-//			int y = rand.nextInt(Level.HEIGHT + 1);//behöver man ta hänsyn till klassen Level?
+//			int x = rand.nextInt(Level.WIDTH + 1);//om olika nivï¿½er har olika storlek?
+//			int y = rand.nextInt(Level.HEIGHT + 1);//behï¿½ver man ta hï¿½nsyn till klassen Level?
 //			p = new Point(x, y);
 //			boolean illegalPlace = true;
 //			while (illegalPlace) {
@@ -65,17 +65,22 @@ public class Player extends Actor {
 //		}
 //	}
     public int calculateDefense() {
-    	int i = 0;
-    	for(Item item: equipment.values()) {
-    		i+=item.getPlusDefense();
-    	}
-    	return i;
+    		int i = 0;
+	    	for(Item item: equipment.values()) {
+	    		i+=item.getPlusDefense();
+	    	}
+    		return i;
     }
+    
     public void takeDamage(int damage) {
-    	int effectiveDamage=damage-calculateDefense()/2;
-    	setHealthPoints(healthPoints-effectiveDamage);
-    	 
+    		int effectiveDamage = damage - calculateDefense() / 2;
+    		if (slotEquiped(EquipmentSlot.HELMET) && slotEquiped(EquipmentSlot.TORSO) && slotEquiped(EquipmentSlot.LEGS)) {
+    			effectiveDamage /= 2;
+    		}
+    		
+    		setHealthPoints(healthPoints-effectiveDamage);
     }
+    
 	public boolean addItemToInventory(Item item) {
 		if (items.size() < 30) {
 			items.add(item);
@@ -138,11 +143,32 @@ public class Player extends Actor {
 	
 	public int calculateDamage(){	
 		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
+		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
 		int damage = strength;
-		if (equipedWeapon != null) {
+		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
+			damage += equipedWeapon.getPlusDamage() * 2;
+		} else if(equipedWeapon != null) {
 			damage += equipedWeapon.getPlusDamage();
 		}
-			
+		if (equipedWeapon != null && equipedShield != null) {
+			damage += equipedShield.getPlusDamage(); 
+		}
+		
         return damage;
     }
+	
+	public boolean slotEquiped(EquipmentSlot slot) {
+		return equipment.containsKey(slot);
+	}
+	
+	public void learnAbility(Ability ability) {
+		abilities.put(ability.getName(), ability);
+	}
+	
+	public void castAbility(String abilityName) {
+		Ability ability = abilities.get(abilityName);
+		if (ability != null) {
+			ability.use(this, level);
+		}
+	}
 }
