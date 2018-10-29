@@ -91,7 +91,7 @@ public class ActorTest {
 		int actorDamage = actor.calculateDamage();
 		int expectedHealth = actor.getHealthPoints() - (playerDamage + actorDamage / 5);
 		
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		assertEquals(expectedHealth, actor.getHealthPoints());
 	}
 	
@@ -109,7 +109,7 @@ public class ActorTest {
 		player.equip(weapon);
 		player.equip(helmet);
 		player.equip(shield);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		int expectedActorHealth = 9;
 		
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
@@ -132,7 +132,7 @@ public class ActorTest {
 		player.equip(helmet);
 		player.equip(torso);
 		player.equip(legs);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		
 		int expectedActorHealth = 6;
 		int expectedPlayerHealth = 3;
@@ -161,7 +161,7 @@ public class ActorTest {
 		player.equip(torso);
 		player.equip(legs);
 		player.equip(shield);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		
 		int expectedActorHealth = 1;
 		int expectedPlayerHealth = 4;
@@ -178,7 +178,7 @@ public class ActorTest {
 		
 		player.addItemToInventory(weapon);
 		player.equip(weapon);
-		actor.onContact(player, level);	
+		actor.onPlayerContact(player);	
 		int expectedActorHealth = 15;
 		int expectedPlayerHealth = -9;
 		
@@ -194,7 +194,7 @@ public class ActorTest {
 		player.addItemToInventory(helmet);
 		
 		player.equip(helmet);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		
 		int expectedActorHealth = 20;
 		int expectedPlayerHealth = -9;

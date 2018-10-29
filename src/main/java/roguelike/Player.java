@@ -3,50 +3,36 @@ package roguelike;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 
 public class Player extends Actor {
 
 	private HashSet<Item> items = new HashSet<>();
-    private int lives;
-    private HashMap<EquipmentSlot, Item> equipment = new HashMap<>();
-    private HashMap<String, Ability> abilities = new HashMap<>();
-    
-    public Player(Level level, String name, int healthPoints, int speed, int intelligence, int strength) {
-        super(level, name, healthPoints, speed, intelligence, strength);
-    }
+	private int lives;
+	private HashMap<EquipmentSlot, Item> equipment = new HashMap<>();
+	private HashMap<String, Ability> abilities = new HashMap<>();
 
-    public int calculateDefense() {
-    		int i = 0;
-	    	for(Item item: equipment.values()) {
-	    		i+=item.getPlusDefense();
-	    	}
-    		return i;
-    }
-    
-    public void takeDamage(int damage) {
-    		int effectiveDamage = damage - calculateDefense() / 2;
-    		if (slotEquiped(EquipmentSlot.HELMET) && slotEquiped(EquipmentSlot.TORSO) && slotEquiped(EquipmentSlot.LEGS)) {
-    			effectiveDamage /= 2;
-    		}
-    		
-    		setHealthPoints(healthPoints-effectiveDamage);
-    }
-	public int calculateDamage(){	
-		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
-		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
-		int damage = strength;
-		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
-			damage += equipedWeapon.getPlusDamage() * 2;
-		} else if(equipedWeapon != null) {
-			damage += equipedWeapon.getPlusDamage();
+	public Player(Level level, String name, int healthPoints, int speed, int intelligence, int strength) {
+		super(level, name, healthPoints, speed, intelligence, strength);
+	}
+
+	public int calculateDefense() {
+		int i = 0;
+		for (Item item : equipment.values()) {
+			i += item.getPlusDefense();
 		}
-		if (equipedWeapon != null && equipedShield != null) {
-			damage += equipedShield.getPlusDamage(); 
+		return i;
+	}
+
+	public void takeDamage(int damage) {
+		int effectiveDamage = damage - calculateDefense() / 2;
+		if (slotEquiped(EquipmentSlot.HELMET) && slotEquiped(EquipmentSlot.TORSO) && slotEquiped(EquipmentSlot.LEGS)) {
+			effectiveDamage /= 2;
 		}
-		
-        return damage;
-    }
-    
+
+		setHealthPoints(healthPoints - effectiveDamage);
+	}
+
 	public boolean addItemToInventory(Item item) {
 		if (items.size() < 30) {
 			items.add(item);
@@ -83,40 +69,52 @@ public class Player extends Actor {
 	}
 
 	public void move(Direction direction) {
-		level.moveEntity(this, direction);
+		level.movePlayer(this, direction);
 	}
 
+	public int getLives() {
+		return lives;
+	}
 
-
-    public int getLives(){
-	    return lives;
-    }
-
-    public void addExtraLives(int extraLives){
-	    lives += extraLives ;
-    }
+	public void addExtraLives(int extraLives) {
+		lives = extraLives + lives;
+	}
 
 	public void equip(Item testItem) {
-		if (itemExistsInInventory(testItem)) 
+		if (itemExistsInInventory(testItem))
 			equipment.put(testItem.getSlot(), testItem);
-	
+
 	}
 
 	public Item getSlot(EquipmentSlot slot) {
 		return equipment.get(slot);
-		
-	}
-	
 
-	
+	}
+
+	public int calculateDamage() {
+		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
+		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
+		int damage = strength;
+		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
+			damage += equipedWeapon.getPlusDamage() * 2;
+		} else if (equipedWeapon != null) {
+			damage += equipedWeapon.getPlusDamage();
+		}
+		if (equipedWeapon != null && equipedShield != null) {
+			damage += equipedShield.getPlusDamage();
+		}
+
+		return damage;
+	}
+ 
 	public boolean slotEquiped(EquipmentSlot slot) {
 		return equipment.containsKey(slot);
 	}
-	
+
 	public void learnAbility(Ability ability) {
 		abilities.put(ability.getName(), ability);
 	}
-	
+
 	public void castAbility(String abilityName) {
 		Ability ability = abilities.get(abilityName);
 		if (ability != null) {

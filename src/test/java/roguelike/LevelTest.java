@@ -93,7 +93,7 @@ public class LevelTest {
 		level.addPosition(new Point(1, 1));
 		level.addPosition(new Point(1, 2));
 		level.placeEntity(actor, new Point(1, 1));
-		level.moveEntity(actor, Direction.UP);
+		level.moveActor(actor, Direction.UP);
 		
 		assertEquals(level.getEntityPlacement(actor), new Point(1, 2));
 	}
@@ -105,7 +105,7 @@ public class LevelTest {
 		level.addPosition(new Point(1, 1));
 		level.addPosition(new Point(1, 2));
 		level.placeEntity(actor, new Point(1, 1));
-		level.moveEntity(actor, Direction.DOWN);
+		level.moveActor(actor, Direction.DOWN);
 		assertEquals(new Point(1, 1), level.getEntityPlacement(actor));
 	}
 	
@@ -118,14 +118,14 @@ public class LevelTest {
 		level.addPosition(new Point(2, 1));
 		level.placeEntity(actor1, new Point(1, 1));
 		level.placeEntity(actor2, new Point(2, 1));
-		level.moveEntity(actor1, Direction.RIGHT);
+		level.moveActor(actor1, Direction.RIGHT);
 		
 		assertEquals(level.getEntityPlacement(actor1), new Point(1, 1));
 	}
 	
 	@Test
 	void walkOverItem() {
-		Actor player = new Player(level, "name", 10, 3, 2, 5);
+		Player player = new Player(level, "name", 10, 3, 2, 5);
 		Item item = new Item(level, "Pilbåge", EquipmentSlot.WEAPON, 0, 0);
 		
 		level.addPosition(new Point(1, 1));
@@ -133,14 +133,14 @@ public class LevelTest {
 		level.placeEntity(player, new Point(1, 1));
 		level.placeEntity(item, new Point(2, 1));
 		
-		level.moveEntity(player, Direction.RIGHT);
+		level.movePlayer(player, Direction.RIGHT);
 		assertEquals(new Point(1, 1), level.getEntityPlacement(player));
 		assertEquals(null, level.getEntityInLocation(new Point(2, 1)));
 	}
 	
 	@Test
 	void walkOverActor() {
-		Actor player = new Player(level, "name", 10, 3, 2, 5);
+		Player player = new Player(level, "name", 10, 3, 2, 5);
 		Actor opponent = new Actor(level, "name", 10 ,3 ,2, 10);
 		
 		level.addPosition(new Point(1, 1));
@@ -148,7 +148,7 @@ public class LevelTest {
 		level.placeEntity(player, new Point(1, 1));
 		level.placeEntity(opponent, new Point(2, 1));
 		
-		level.moveEntity(player, Direction.RIGHT);
+		level.movePlayer(player, Direction.RIGHT);
 		assertFalse(level.entityExists(player));
 	}
 }

@@ -20,7 +20,6 @@ public abstract class Entity {
 	}
 
 	public int hashCode() {
-
 		return uniqueID.hashCode();
 	}
 
@@ -28,11 +27,11 @@ public abstract class Entity {
 	public boolean equals(Object obj) {
 		if (obj instanceof Entity) {
 			Entity entity = (Entity) obj;
-			return this.uniqueID == entity.uniqueID;
+			return this.uniqueID.equals(entity.uniqueID);
 		}
 		return false;
 	}
 
-	public abstract void onContact(Entity entity, Level level);
-
+	public abstract void onPlayerContact(Player player);
+	
 }

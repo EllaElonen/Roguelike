@@ -16,8 +16,6 @@ public class Item extends Entity{
 		this.plusDefense = plusDefense;
 	}
 	
-	
-	
 	public EquipmentSlot getSlot() {
 		return slot;
 	}
@@ -26,12 +24,9 @@ public class Item extends Entity{
 		return plusDamage;
 	}
 	
-	public void onContact(Entity entity, Level level) {
-		if (entity instanceof Player) {
-			Player player = (Player)entity;
+	public void onPlayerContact(Player player) {
 			player.addItemToInventory(this);
 			level.removeEntity(this);
-		}
 	}
 
 	public int getPlusDefense() {

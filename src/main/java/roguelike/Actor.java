@@ -72,18 +72,16 @@ public class Actor extends Entity {
 		return intelligence;
 	}
 
-	public void onContact(Entity entity, Level level) {
-		if (entity instanceof Player) {
-			Player opponent = (Player) entity;
-			tradeBlows(opponent);
+	public void onPlayerContact(Player player) {
+		tradeBlows(player);
 
-			if (!opponent.isAlive()) {
-				level.removeEntity(opponent);
-			}
-			if (!isAlive()) {
-				level.removeEntity(this);
-			}
+		if (!player.isAlive()) {
+			level.removeEntity(player);
 		}
+		if (!isAlive()) {
+			level.removeEntity(this);
+		}
+		
 	}
 
 	private void tradeBlows(Player opponent) {
@@ -94,7 +92,7 @@ public class Actor extends Entity {
 			takeDamage(calculateDamage() / 5);
 		}
 	}
-
+	
 	public boolean isAlive() {
 		return healthPoints > 0;
 	}

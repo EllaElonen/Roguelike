@@ -192,7 +192,7 @@ public class PlayerTest {
 		
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(weapon);
-		actor.onContact(testPlayer, level);
+		actor.onPlayerContact(testPlayer);
 		
 		assertEquals(5, actor.getHealthPoints());
 	}
