@@ -28,7 +28,7 @@ public abstract class Entity {
 	public boolean equals(Object obj) {
 		if (obj instanceof Entity) {
 			Entity entity = (Entity) obj;
-			return this.uniqueID == entity.uniqueID;
+			return this.hashCode() == entity.hashCode();
 		}
 		return false;
 	}
