@@ -127,7 +127,7 @@ public class PlayerTest {
 	public void addExtraLives() {
 		Player player = new Player(level, "name", 10, 3, 2, 5);
 		player.addExtraLives(1);
-		assertEquals(player.getLives(), 1);
+		assertEquals(player.getLives(), 4);
 	}
 
 	
@@ -227,7 +227,7 @@ public class PlayerTest {
 		testPlayer.equip(legs);
 		testPlayer.equip(weapon);
 		
-		assertEquals(expectedDamage, testPlayer.calculateDamage());
+		assertEquals(expectedDamage, testPlayer.calculateAttack());
 	}
 	
 	@Test
@@ -241,7 +241,7 @@ public class PlayerTest {
 		testPlayer.equip(shield);
 		testPlayer.equip(weapon);
 		
-		assertEquals(expectedDamage, testPlayer.calculateDamage());
+		assertEquals(expectedDamage, testPlayer.calculateAttack());
 	}
 	
 	@Test
@@ -278,6 +278,6 @@ public class PlayerTest {
 		testPlayer.equip(legs);
 		testPlayer.equip(weapon);
 		
-		assertEquals(expectedDamage, testPlayer.calculateDamage());
+		assertEquals(expectedDamage, testPlayer.calculateAttack());
 	}
 }

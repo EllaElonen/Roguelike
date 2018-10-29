@@ -51,7 +51,7 @@ public class Actor extends Entity {
 		return strength;
 	}
 
-	public int calculateDamage() {
+	public int calculateAttack() {
 		return strength;
 	}
 
@@ -87,11 +87,11 @@ public class Actor extends Entity {
 	}
 
 	private void tradeBlows(Player opponent) {
-		opponent.takeDamage(calculateDamage());
-		takeDamage(opponent.calculateDamage());
+		opponent.takeDamage(calculateAttack());
+		takeDamage(opponent.calculateAttack());
 
 		if (opponent.slotEquiped(EquipmentSlot.HELMET) && opponent.slotEquiped(EquipmentSlot.WEAPON)) {
-			takeDamage(calculateDamage() / 5);
+			takeDamage(calculateAttack() / 5);
 		}
 	}
 

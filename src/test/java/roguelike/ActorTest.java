@@ -87,8 +87,8 @@ public class ActorTest {
 		player.equip(weapon);
 		player.equip(helmet);
 		
-		int playerDamage = player.calculateDamage();
-		int actorDamage = actor.calculateDamage();
+		int playerDamage = player.calculateAttack();
+		int actorDamage = actor.calculateAttack();
 		int expectedHealth = actor.getHealthPoints() - (playerDamage + actorDamage / 5);
 		
 		actor.onContact(player, level);

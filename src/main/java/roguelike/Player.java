@@ -1,13 +1,12 @@
 package roguelike;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Player extends Actor {
 
 	private HashSet<Item> items = new HashSet<>();
-    private int lives;
+    private int lives=3;
     private HashMap<EquipmentSlot, Item> equipment = new HashMap<>();
     private HashMap<String, Ability> abilities = new HashMap<>();
     
@@ -31,21 +30,23 @@ public class Player extends Actor {
     		
     		setHealthPoints(healthPoints-effectiveDamage);
     }
-	public int calculateDamage(){	
+	public int calculateAttack(){	
 		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
 		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
 		int damage = strength;
-		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
-			damage += equipedWeapon.getPlusDamage() * 2;
-		} else if(equipedWeapon != null) {
+		if(slotEquiped(EquipmentSlot.WEAPON)) {
 			damage += equipedWeapon.getPlusDamage();
+			if(slotEquiped(EquipmentSlot.LEGS)) {
+				damage += equipedWeapon.getPlusDamage();
+			}
+			if(slotEquiped(EquipmentSlot.SHIELD)) {
+				damage += equipedShield.getPlusDamage(); 
+			}
 		}
-		if (equipedWeapon != null && equipedShield != null) {
-			damage += equipedShield.getPlusDamage(); 
-		}
-		
+	
         return damage;
     }
+	
     
 	public boolean addItemToInventory(Item item) {
 		if (items.size() < 30) {
