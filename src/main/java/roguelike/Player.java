@@ -28,12 +28,16 @@ public class Player extends Actor {
     			effectiveDamage /= 2;
     		}
     		
-    		setHealthPoints(healthPoints-effectiveDamage);
+    		setHealthPoints(getHealthPoints()-effectiveDamage);
+    		if(getHealthPoints()<=0) {
+    			lives--;
+    			setHealthPoints(99);
+    		}
     }
 	public int calculateAttack(){	
 		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
 		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
-		int damage = strength;
+		int damage = getStrength();
 		if(slotEquiped(EquipmentSlot.WEAPON)) {
 			damage += equipedWeapon.getPlusDamage();
 			if(slotEquiped(EquipmentSlot.LEGS)) {
@@ -124,4 +128,9 @@ public class Player extends Actor {
 			ability.use(this, level);
 		}
 	}
+	public boolean isAlive() {
+		return getHealthPoints() > 0&&lives>0;
+
+	}
+	
 }

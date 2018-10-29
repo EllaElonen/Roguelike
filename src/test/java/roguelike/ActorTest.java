@@ -180,7 +180,7 @@ public class ActorTest {
 		player.equip(weapon);
 		actor.onContact(player, level);	
 		int expectedActorHealth = 15;
-		int expectedPlayerHealth = -9;
+		int expectedPlayerHealth = 99;
 		
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
 		assertEquals(expectedPlayerHealth, player.getHealthPoints());
@@ -197,7 +197,7 @@ public class ActorTest {
 		actor.onContact(player, level);
 		
 		int expectedActorHealth = 20;
-		int expectedPlayerHealth = -9;
+		int expectedPlayerHealth = 99;
 		
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
 		assertEquals(expectedPlayerHealth, player.getHealthPoints());

@@ -20,14 +20,14 @@ public class Teleportation implements Ability {
 	}
 
 	public void use(Player player, Level level) {
-		if (player.intelligence >= requiredIntelligence) {
+		if (player.getIntelligence() >= requiredIntelligence) {
 			ArrayList<Point> possiblePositions = level.getAvailablePlaces();
 			if (possiblePositions.size() > 0) {
 				Collections.shuffle(possiblePositions);
 				level.placeEntity(player, possiblePositions.get(0));
 
 			}
-			player.intelligence -= requiredIntelligence;
+			player.setIntelligence(player.getIntelligence()-requiredIntelligence) ;
 		}
 	}
 	

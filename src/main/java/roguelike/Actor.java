@@ -4,10 +4,10 @@ import java.util.UUID;
 
 public class Actor extends Entity {
 	private String name;
-	protected int healthPoints;
+	private int healthPoints;
 	private int speed;
-	protected int intelligence;
-	protected int strength;
+	private int intelligence;
+	private int strength;
 
 	public Actor(Level level, String name, int healthPoints, int speed, int intelligence, int strength) {
 		this(level, name, healthPoints, speed, intelligence, UUID.randomUUID().toString(), strength);
@@ -70,6 +70,10 @@ public class Actor extends Entity {
 
 	public int getIntelligence() {
 		return intelligence;
+	}
+
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
 	}
 
 	public void onContact(Entity entity, Level level) {
