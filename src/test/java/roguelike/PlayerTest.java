@@ -132,30 +132,30 @@ public class PlayerTest {
 
 	
 
-	@Test
-	void attackWeakerMonster() {
-		Player player = new Player(level, "player", 10, 3, 2, 5);
-		Actor monster = new Actor(level, "Monster1", 8, 3, 2, 5);
-		player.takeDamage(3);
-		assertEquals(player.getHealthPoints(), 7);
-
-	}
-
-	@Test
-	void attackEqualMonster() {
-		Player player = new Player(level, "Player1", 10, 3, 2, 5);
-		Actor monster = new Actor(level, "Monster1", 10, 3, 2, 5);
-		player.takeDamage(3);
-		assertEquals(player.getHealthPoints(), 7);
-	}
-
-	@Test
-	void attackStrongerMonster() {
-		Player player = new Player(level, "Player1", 8, 3, 2, 5);
-		Actor monster = new Actor(level, "Monster1", 10, 3, 2, 5);
-		player.takeDamage(3);
-		assertEquals(player.getHealthPoints(), 5);
-	}
+//	@Test
+//	void attackWeakerMonster() {
+//		Player player = new Player(level, "player", 10, 3, 2, 5);
+//	//	Actor monster = new Actor(level, "Monster1", 8, 3, 2, 5);
+//		player.takeDamage(3);
+//		assertEquals(player.getHealthPoints(), 7);
+//
+//	}
+//
+//	@Test
+//	void attackEqualMonster() {
+//		Player player = new Player(level, "Player1", 10, 3, 2, 5);
+//	//	Actor monster = new Actor(level, "Monster1", 10, 3, 2, 5);
+//		player.takeDamage(3);
+//		assertEquals(player.getHealthPoints(), 7);
+//	}
+//
+//	@Test
+//	void attackStrongerMonster() {
+//		Player player = new Player(level, "Player1", 8, 3, 2, 5);
+//		Actor monster = new Actor(level, "Monster1", 10, 3, 2, 5);
+//		player.takeDamage(3);
+//		assertEquals(player.getHealthPoints(), 5);
+//	}
 
 	@Test
 	void equipWithWeapon() {

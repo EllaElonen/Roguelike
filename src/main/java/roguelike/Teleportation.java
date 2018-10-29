@@ -6,11 +6,11 @@ import java.util.Random;
 import java.awt.*;
 import java.util.Collections;
 
-public class Teleport implements Ability {
+public class Teleportation implements Ability {
 	private String name;
 	private int requiredIntelligence;
 
-	public Teleport(String name, int requiredIntelligence) {
+	public Teleportation(String name, int requiredIntelligence) {
 		this.name = name;
 
 		if (requiredIntelligence <1 || requiredIntelligence > 99) {

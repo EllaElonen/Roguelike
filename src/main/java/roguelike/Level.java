@@ -8,8 +8,7 @@ import java.awt.*;
 import java.util.HashSet;
 
 public class Level {
-	public static int WIDTH = 50;
-	public static int HEIGHT = 40;
+	
 	private String name;
 	private BiMap<Entity, Point> entityLocations = HashBiMap.create();
 

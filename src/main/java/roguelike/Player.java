@@ -3,7 +3,6 @@ package roguelike;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Random;
 
 public class Player extends Actor {
 
@@ -15,55 +14,7 @@ public class Player extends Actor {
     public Player(Level level, String name, int healthPoints, int speed, int intelligence, int strength) {
         super(level, name, healthPoints, speed, intelligence, strength);
     }
-    //kommentar
-//    public Point moveToRandomPlace() {
-//		Point p;
-//		if (intelligence >= 1) {
-//			Random rand = new Random();
-//			int x = rand.nextInt(Level.WIDTH + 1);//om olika niv�er har olika storlek?
-//			int y = rand.nextInt(Level.HEIGHT + 1);//beh�ver man ta h�nsyn till klassen Level?
-//			p = new Point(x, y);
-//			boolean illegalPlace = true;
-//			while (illegalPlace) {
-//				if (!Level.positions.contains(p) && !p.equals(this.level)) {
-//					this.level = p;
-//					illegalPlace = false;
-//				}
-//			}
-//			intelligence--;
-//			return p;
-//		} else {
-//			return this.level;
-//		}
-//	}
-//    public Point[] throwFire() {
-//		if (intelligence >= 2) {
-//			Point[] p = new Point[fireLength];
-//
-//			if (direction==UPWARDS) {
-//				for(int i = 0;i<fireLength;i++) {
-//					p[i]=new Point(level.x,level.y-i-1);
-//				}		
-//			}else if(direction==DOWNWARDS) {
-//				for(int i = 0;i<fireLength;i++) {
-//					p[i]=new Point(level.x,level.y+i+1);
-//				}
-//			}else if(direction==LEFTWARDS) {
-//				for(int i = 0;i<fireLength;i++) {
-//					p[i]=new Point(level.x-i-1,level.y);
-//				}
-//			}else {
-//				for(int i = 0;i<fireLength;i++) {
-//					p[i]=new Point(level.x+i+1,level.y);
-//				}
-//			}
-//			intelligence -= 2;
-//		
-//			return p;
-//		} else {
-//			return null;
-//		}
-//	}
+
     public int calculateDefense() {
     		int i = 0;
 	    	for(Item item: equipment.values()) {
@@ -79,6 +30,21 @@ public class Player extends Actor {
     		}
     		
     		setHealthPoints(healthPoints-effectiveDamage);
+    }
+	public int calculateDamage(){	
+		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
+		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
+		int damage = strength;
+		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
+			damage += equipedWeapon.getPlusDamage() * 2;
+		} else if(equipedWeapon != null) {
+			damage += equipedWeapon.getPlusDamage();
+		}
+		if (equipedWeapon != null && equipedShield != null) {
+			damage += equipedShield.getPlusDamage(); 
+		}
+		
+        return damage;
     }
     
 	public boolean addItemToInventory(Item item) {
@@ -127,7 +93,7 @@ public class Player extends Actor {
     }
 
     public void addExtraLives(int extraLives){
-	    lives = extraLives + lives;
+	    lives += extraLives ;
     }
 
 	public void equip(Item testItem) {
@@ -141,21 +107,7 @@ public class Player extends Actor {
 		
 	}
 	
-	public int calculateDamage(){	
-		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
-		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
-		int damage = strength;
-		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
-			damage += equipedWeapon.getPlusDamage() * 2;
-		} else if(equipedWeapon != null) {
-			damage += equipedWeapon.getPlusDamage();
-		}
-		if (equipedWeapon != null && equipedShield != null) {
-			damage += equipedShield.getPlusDamage(); 
-		}
-		
-        return damage;
-    }
+
 	
 	public boolean slotEquiped(EquipmentSlot slot) {
 		return equipment.containsKey(slot);

@@ -41,7 +41,7 @@ public class AbilityTest {
 	void noOtherPlacesTaken() {
 
 		level.placeEntity(testPlayer1, new Point(1, 1));
-		new Teleport("teleport", 2).use(testPlayer1, level);
+		new Teleportation("teleport", 2).use(testPlayer1, level);
 		assertNotEquals(new Point(1, 1), level.getEntityPlacement(testPlayer1));
 		assertNotNull(level.getEntityPlacement(testPlayer1));
 	}
@@ -50,7 +50,7 @@ public class AbilityTest {
 	void teleportPlayerDecreaseIntelligence() {
 
 		level.placeEntity(testPlayer1, new Point(1, 1));
-		new Teleport("teleport", 2).use(testPlayer1, level);
+		new Teleportation("teleport", 2).use(testPlayer1, level);
 		assertEquals(2, testPlayer1.getIntelligence());
 	}
 
@@ -58,7 +58,7 @@ public class AbilityTest {
 	void teleportingPlayerWithNotEnoughIntelligence() {
 		Player testPlayer2 = new Player(level, "name", 10, 9, 1, 10);
 		level.placeEntity(testPlayer2, new Point(1, 1));
-		new Teleport("teleport", 2).use(testPlayer2, level);
+		new Teleportation("teleport", 2).use(testPlayer2, level);
 		assertEquals(new Point(1, 1), level.getEntityPlacement(testPlayer2));
 		assertNotNull(level.getEntityPlacement(testPlayer2));
 	}
@@ -69,7 +69,7 @@ public class AbilityTest {
 		fillLevel();
 		int beforeIntelligence = testPlayer1.getIntelligence();
 		Assertions.assertTimeout(Duration.ofMillis(2), () ->{
-		new Teleport("teleport", 2).use(testPlayer1, level);
+		new Teleportation("teleport", 2).use(testPlayer1, level);
 
 		});
 		assertNotEquals(beforeIntelligence, testPlayer1.getIntelligence());
@@ -83,7 +83,7 @@ public class AbilityTest {
 		fillLevel();
 		level.emptyPosition(new Point(2, 2));
 
-		new Teleport("teleport", 2).use(testPlayer1, level);
+		new Teleportation("teleport", 2).use(testPlayer1, level);
 
 		assertEquals(new Point(2, 2), level.getEntityPlacement(testPlayer1));
 	}
@@ -97,7 +97,7 @@ public class AbilityTest {
 		level.placeEntity(actor1, new Point(2, 2));
 		level.placeEntity(actor2, new Point(3, 3));
 
-		new Teleport("teleport", 2).use(testPlayer1, level);
+		new Teleportation("teleport", 2).use(testPlayer1, level);
 
 		assertNotEquals(new Point(1, 1), level.getEntityPlacement(testPlayer1));
 		assertNotNull(level.getEntityPlacement(testPlayer1));
@@ -107,14 +107,14 @@ public class AbilityTest {
 	@Test
 	void tooHighRequiredIntelligence() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Teleport("name", 100);
+			new Teleportation("name", 100);
 		});
 
 	}
 	@Test
 	void tooLowRequiredIntelligence() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Teleport("name", 0);
+			new Teleportation("name", 0);
 		});
 
 	}

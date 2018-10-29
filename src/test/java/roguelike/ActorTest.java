@@ -11,34 +11,57 @@ public class ActorTest {
 	Level level= new Level("levelName");
 	//Point point = new Point(1,1);
 	
-	@Test
-	public void negativeHP() {
-		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(level, "name", -10, 5, 2, 10);
-		});
-	}
-	
-	@Test
-	public void negativeStrength() {
-		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(level, "name", 10, 5, 2, -10);
-		});
-	}
-	
-	@Test
-	public void negativeSpeed() {
-		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(level, "name", 10, -5, 2, 10);
-		});	
-	}
-	
-	@Test
-	public void negativeIntelligence() {
-		assertThrows (IllegalArgumentException.class, () ->{
-			new Actor(level, "name", 10, 5, -2, 10);
-		});	
-	}
-
+//	@Test
+//	public void negativeHP() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", -10, 5, 2, 10);
+//		});
+//	}
+//	
+//	@Test
+//	public void negativeStrength() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 10, 5, 2, -10);
+//		});
+//	}
+//	
+//	@Test
+//	public void negativeSpeed() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 10, -5, 2, 10);
+//		});	
+//	}
+//
+//	@Test
+//	public void negativeIntelligence() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 10, 5, -2, 10);
+//		});	
+//	}
+//	@Test
+//	public void tooHighIntelligence() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 10, 5, 200, 10);
+//		});	
+//	}
+//	@Test
+//	public void tooHighHP() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 110, 5, 2, 10);
+//		});
+//	}
+//	@Test
+//	public void tooHighSpeed() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 10, 300, 2, 10);
+//		});	
+//	}
+//	@Test
+//	public void tooHighStrength() {
+//		assertThrows (IllegalArgumentException.class, () ->{
+//			new Actor(level, "name", 10, 5, 2, 120);
+//		});
+//	}
 	
 	@Test
 	public void listStats() {
@@ -146,5 +169,38 @@ public class ActorTest {
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
 		assertEquals(expectedPlayerHealth, player.getHealthPoints());
 	}
-
+	@Test
+	public void attackedByPlayerWithWeapon() {
+		
+		Actor actor = new Actor(level, "name", 25, 5, 7, 20);
+		Player player = new Player(level, "name", 10, 5, 7, 5);
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
+		
+		player.addItemToInventory(weapon);
+		player.equip(weapon);
+		actor.onContact(player, level);	
+		int expectedActorHealth = 15;
+		int expectedPlayerHealth = -9;
+		
+		assertEquals(expectedActorHealth, actor.getHealthPoints());
+		assertEquals(expectedPlayerHealth, player.getHealthPoints());
+	}
+	@Test
+	public void attackedByPlayerWithHelmet() {
+		Actor actor = new Actor(level, "name", 25, 5, 7, 20);
+		Player player = new Player(level, "name", 10, 5, 7, 5);
+		Item helmet = new Item(level, "testName", EquipmentSlot.HELMET, 5, 3);
+		
+		player.addItemToInventory(helmet);
+		
+		player.equip(helmet);
+		actor.onContact(player, level);
+		
+		int expectedActorHealth = 20;
+		int expectedPlayerHealth = -9;
+		
+		assertEquals(expectedActorHealth, actor.getHealthPoints());
+		assertEquals(expectedPlayerHealth, player.getHealthPoints());
+	}
+	
 }
