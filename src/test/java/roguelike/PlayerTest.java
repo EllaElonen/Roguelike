@@ -184,6 +184,16 @@ public class PlayerTest {
 	}
 
 	@Test
+	void attack() {
+		Actor actor = new Actor(level, "name", 20, 10, 10, 1);
+		int expectedHealth = actor.getHealthPoints() - testPlayer.getStrength();
+		
+		testPlayer.attack(actor);
+		
+		assertEquals(expectedHealth, actor.getHealthPoints());
+	}
+	
+	@Test
 	void attackWithWeapon() {
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 0);
 		Actor actor = new Actor(level, "name", 20, 10, 10, 1);
