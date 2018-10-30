@@ -90,27 +90,10 @@ public class Player extends Actor {
 
 	}
 
-//	public int calculateDamage() {
-//		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
-//		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
-//		int damage = strength;
-//		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
-//			damage += equipedWeapon.getPlusDamage() * 2;
-//		} else if (equipedWeapon != null) {
-//			damage += equipedWeapon.getPlusDamage();
-//		}
-//		if (equipedWeapon != null && equipedShield != null) {
-//			damage += equipedShield.getPlusDamage();
-//		}
-//
-//		return damage;
-//	}
-	
 	public int calculateAttack() {
 		int damage = getStrength();
 		if (slotEquiped(EquipmentSlot.WEAPON))
 			damage += equipment.get(EquipmentSlot.WEAPON).getPlusDamage();
-		System.out.println(damage);
 		return damage;
 	}
 	
