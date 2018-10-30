@@ -26,7 +26,7 @@ public class Item extends Entity{
 	
 	public void onPlayerContact(Player player) {
 			player.addItemToInventory(this);
-			level.removeEntity(this);
+			getLevel().removeEntity(this);
 	}
 
 	public int getPlusDefense() {

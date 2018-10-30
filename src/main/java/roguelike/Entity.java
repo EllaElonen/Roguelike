@@ -7,7 +7,7 @@ public abstract class Entity {
 
 	private String uniqueID;
 	// private Level level;
-	protected Level level;
+	private Level level;
 
 	public Entity(Level level) {
 		this(level, UUID.randomUUID().toString());
@@ -21,6 +21,10 @@ public abstract class Entity {
 
 	public int hashCode() {
 		return uniqueID.hashCode();
+	}
+	
+	public Level getLevel() {
+		return level;
 	}
 
 	@Override

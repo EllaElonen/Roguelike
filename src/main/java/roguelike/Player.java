@@ -17,15 +17,15 @@ public class Player extends Actor {
 	}
 
 	public int calculateDefense() {
-		int i = 0;
+		int sum = 0;
 		for (Item item : equipment.values()) {
-			i += item.getPlusDefense();
+			sum += item.getPlusDefense();
 		}
-		return i;
+		return sum / 2;
 	}
 
 	public void takeDamage(int damage) {
-		int effectiveDamage = damage - calculateDefense() / 2;
+		int effectiveDamage = damage - calculateDefense();
 		if (slotEquiped(EquipmentSlot.HELMET) && slotEquiped(EquipmentSlot.TORSO) && slotEquiped(EquipmentSlot.LEGS)) {
 			effectiveDamage /= 2;
 		}
@@ -69,7 +69,7 @@ public class Player extends Actor {
 	}
 
 	public void move(Direction direction) {
-		level.movePlayer(this, direction);
+		getLevel().movePlayer(this, direction);
 	}
 
 	public int getLives() {
@@ -91,20 +91,67 @@ public class Player extends Actor {
 
 	}
 
+//	public int calculateDamage() {
+//		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
+//		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
+//		int damage = strength;
+//		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
+//			damage += equipedWeapon.getPlusDamage() * 2;
+//		} else if (equipedWeapon != null) {
+//			damage += equipedWeapon.getPlusDamage();
+//		}
+//		if (equipedWeapon != null && equipedShield != null) {
+//			damage += equipedShield.getPlusDamage();
+//		}
+//
+//		return damage;
+//	}
+	
 	public int calculateDamage() {
-		Item equipedWeapon = equipment.get(EquipmentSlot.WEAPON);
-		Item equipedShield = equipment.get(EquipmentSlot.SHIELD);
 		int damage = strength;
-		if (equipedWeapon != null && slotEquiped(EquipmentSlot.LEGS)) {
-			damage += equipedWeapon.getPlusDamage() * 2;
-		} else if (equipedWeapon != null) {
-			damage += equipedWeapon.getPlusDamage();
-		}
-		if (equipedWeapon != null && equipedShield != null) {
-			damage += equipedShield.getPlusDamage();
-		}
-
+		if (slotEquiped(EquipmentSlot.WEAPON))
+			damage += equipment.get(EquipmentSlot.WEAPON).getPlusDamage();
 		return damage;
+	}
+	
+	public void attack(Actor opponent) {
+		int damage = calculateDamage();
+		System.out.println(getName() + " attacks " + opponent.getName() + " for " + damage + " damage.");
+		opponent.takeDamage(damage); 
+		
+		if (slotEquiped(EquipmentSlot.WEAPON) && slotEquiped(EquipmentSlot.LEGS))
+			chargeAttack(opponent);
+		
+		if (slotEquiped(EquipmentSlot.WEAPON) && slotEquiped(EquipmentSlot.SHIELD))
+			shieldBash(opponent);
+		
+		if (slotEquiped(EquipmentSlot.HELMET) && slotEquiped(EquipmentSlot.WEAPON)) 
+			counterAttack(opponent);
+		
+		if(!opponent.isAlive())
+			System.out.println(getName() + " has slain " + opponent.getName() + "!");
+			opponent.getLevel().removeEntity(opponent);
+	}
+	
+	private void chargeAttack(Actor opponent) {
+		int damage = equipment.get(EquipmentSlot.WEAPON).getPlusDamage();
+		System.out.println(getName() + " charges " + opponent.getName() + " for " + damage + " damage.");
+		
+		opponent.takeDamage(damage);
+	}
+	
+	private void shieldBash(Actor opponent) {
+		int damage = equipment.get(EquipmentSlot.SHIELD).getPlusDamage();
+		System.out.println(getName() + " shield bashes " + opponent.getName() + " for " + damage + " damage.");
+		
+		opponent.takeDamage(damage);
+	}
+	
+	private void counterAttack(Actor opponent) {
+		int damage = opponent.calculateDamage() / 5;
+		System.out.println(getName() + " counterattacks " + opponent.getName() + " for " + damage + " damage.");
+		
+		opponent.takeDamage(damage);
 	}
  
 	public boolean slotEquiped(EquipmentSlot slot) {
@@ -118,7 +165,7 @@ public class Player extends Actor {
 	public void castAbility(String abilityName) {
 		Ability ability = abilities.get(abilityName);
 		if (ability != null) {
-			ability.use(this, level);
+			ability.use(this, getLevel());
 		}
 	}
 }

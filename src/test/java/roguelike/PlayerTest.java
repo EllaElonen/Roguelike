@@ -17,9 +17,8 @@ public class PlayerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-
-		testPlayer = new Player(level, "name", 10, 3, 2, 10);
 		level = new Level("levelName");
+		testPlayer = new Player(level, "name", 10, 3, 2, 10);
 		testItem = new Item(level, "testName", EquipmentSlot.WEAPON, 0, 0);
 	}
 
@@ -188,7 +187,6 @@ public class PlayerTest {
 	void attackWithWeapon() {
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 0);
 		Actor actor = new Actor(level, "name", 20, 10, 10, 1);
-		Level level = new Level("level");
 		
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(weapon);
@@ -216,32 +214,58 @@ public class PlayerTest {
 		
 	}
 	
+	// Alla dessa tester måste skrivas om så att de testar attackmetoden istället.
 	@Test
-	void calculateDamageWithWeaponAndLegs() {
+	void attackWithWeaponAndLegs() {
+		Actor opponent = new Actor(level, "name", 20, 10, 10, 1);
 		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);	
-		int expectedDamage = testPlayer.getStrength() + weapon.getPlusDamage() * 2;
+		int expectedHealth = opponent.getHealthPoints() - (testPlayer.getStrength() + weapon.getPlusDamage() * 2);
 		
 		testPlayer.addItemToInventory(legs);
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(legs);
 		testPlayer.equip(weapon);
+		testPlayer.attack(opponent);
 		
-		assertEquals(expectedDamage, testPlayer.calculateDamage());
+		assertEquals(expectedHealth, opponent.getHealthPoints());
 	}
 	
 	@Test
-	void calculateDamageWithWeaponAndShield() {
+	void attackWithWeaponAndShield() {
+		Actor opponent = new Actor(level, "name", 20, 10, 10, 1);
 		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);	
-		int expectedDamage = testPlayer.getStrength() + weapon.getPlusDamage() + shield.getPlusDamage();
+		int expectedHealth = opponent.getHealthPoints() - 
+				(testPlayer.getStrength() + weapon.getPlusDamage() + shield.getPlusDamage());
 		
 		testPlayer.addItemToInventory(shield);
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(shield);
 		testPlayer.equip(weapon);
+		testPlayer.attack(opponent);
 		
-		assertEquals(expectedDamage, testPlayer.calculateDamage());
+		assertEquals(expectedHealth, opponent.getHealthPoints());
+	}
+	
+	@Test
+	void attackWithWeaponAndLegsAndShield() {
+		Actor opponent = new Actor(level, "name", 20, 10, 10, 1);
+		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
+		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
+		int expectedHealth = opponent.getHealthPoints() - 
+				(testPlayer.getStrength() + weapon.getPlusDamage() * 2 + shield.getPlusDamage());
+		
+		testPlayer.addItemToInventory(shield);
+		testPlayer.addItemToInventory(legs);
+		testPlayer.addItemToInventory(weapon);
+		testPlayer.equip(shield);
+		testPlayer.equip(legs);
+		testPlayer.equip(weapon);
+		testPlayer.attack(opponent);
+		
+		assertEquals(expectedHealth, opponent.getHealthPoints());
 	}
 	
 	@Test
@@ -262,22 +286,5 @@ public class PlayerTest {
 		testPlayer.takeDamage(damage);
 		
 		assertEquals(expectedHealth, testPlayer.getHealthPoints());
-	}
-	
-	@Test
-	void calculateDamageWithWeaponAndLegsAndShield() {
-		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
-		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
-		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
-		int expectedDamage = testPlayer.getStrength() + weapon.getPlusDamage() * 2 + shield.getPlusDamage();
-		
-		testPlayer.addItemToInventory(shield);
-		testPlayer.addItemToInventory(legs);
-		testPlayer.addItemToInventory(weapon);
-		testPlayer.equip(shield);
-		testPlayer.equip(legs);
-		testPlayer.equip(weapon);
-		
-		assertEquals(expectedDamage, testPlayer.calculateDamage());
 	}
 }
