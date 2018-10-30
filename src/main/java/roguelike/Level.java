@@ -66,35 +66,50 @@ public class Level {
 		return availablePositions;
 	}
 
-	public void moveEntity(Entity entity, Direction direction) {
-		Point oldPoint = entityLocations.get(entity);
-		if (oldPoint != null) {
-			Point newPoint;
-			switch (direction) {
-			case UP:
-				newPoint = new Point(oldPoint.x, oldPoint.y + 1);
-				break;
-			case DOWN:
-				newPoint = new Point(oldPoint.x, oldPoint.y - 1);
-				break;
-			case RIGHT:
-				newPoint = new Point(oldPoint.x + 1, oldPoint.y);
-				break;
-			case LEFT:
-				newPoint = new Point(oldPoint.x - 1, oldPoint.y);
-				break;
-			default:
-				newPoint = oldPoint;
-			}
-			Entity entityInSpot = entityLocations.inverse().get(newPoint);
-			if (entityInSpot != null) {
-				entityInSpot.onContact(entity, this);
-			} else if (positionAvailable(newPoint)) {
-				entityLocations.put(entity, newPoint);
-			}
+	public void moveActor(Actor actor, Direction direction) {
+		Point newPoint = getPointInDirectionOf(actor, direction);
+		if (positionAvailable(newPoint)) {
+			entityLocations.put(actor, newPoint);
 		}
 	}
-
+	
+	public void movePlayer(Player player, Direction direction) {
+		Point newPoint = getPointInDirectionOf(player, direction);
+		Entity entityInSpot = entityLocations.inverse().get(newPoint);
+		
+		if (positionAvailable(newPoint)) {
+			entityLocations.put(player, newPoint);
+		} else if (entityInSpot != null) {
+			entityInSpot.onPlayerContact(player);
+		}
+	}
+	
+	private Point getPointInDirectionOf(Entity entity, Direction direction) {
+		Point entityPoint = entityLocations.get(entity);
+		Point adjacentPoint;
+		if (entityPoint != null) {
+			switch (direction) {
+				case UP:
+					adjacentPoint = new Point(entityPoint.x, entityPoint.y + 1);
+					break;
+				case DOWN:
+					adjacentPoint = new Point(entityPoint.x, entityPoint.y - 1);
+					break;
+				case RIGHT:
+					adjacentPoint = new Point(entityPoint.x + 1, entityPoint.y);
+					break;
+				case LEFT:
+					adjacentPoint = new Point(entityPoint.x - 1, entityPoint.y);
+					break;
+				default:
+					adjacentPoint = entityPoint;
+			}
+		} else {
+			adjacentPoint = entityPoint;
+		}
+		return adjacentPoint;
+	}
+		
 	public boolean positionAvailable(Point point) {
 		return positionExists(point) && entityLocations.inverse().get(point) == null;
 	}
@@ -104,7 +119,7 @@ public class Level {
 	}
 
 	public boolean entityExists(Entity entity) {
-		return entityLocations.containsValue(entity);
+		return entityLocations.containsKey(entity);
 	}
 
 	public String getName() {

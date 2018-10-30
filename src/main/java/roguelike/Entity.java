@@ -7,7 +7,7 @@ public abstract class Entity {
 
 	private String uniqueID;
 	// private Level level;
-	protected Level level;
+	private Level level;
 
 	public Entity(Level level) {
 		this(level, UUID.randomUUID().toString());
@@ -20,19 +20,21 @@ public abstract class Entity {
 	}
 
 	public int hashCode() {
-
 		return uniqueID.hashCode();
+	}
+	
+	public Level getLevel() {
+		return level;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Entity) {
 			Entity entity = (Entity) obj;
-			return this.hashCode() == entity.hashCode();
+			return this.uniqueID.equals(entity.uniqueID);
 		}
 		return false;
 	}
 
-	public abstract void onContact(Entity entity, Level level);
-
+	public abstract void onPlayerContact(Player player);	
 }

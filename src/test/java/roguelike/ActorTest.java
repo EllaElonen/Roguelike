@@ -78,7 +78,7 @@ public class ActorTest {
 	@Test
 	public void attackedByPlayerWithWeaponAndHelmet() {
 		Actor actor = new Actor(level, "name", 10, 5, 7, 5);
-		Player player = new Player(level, "name", 10, 5, 7, 5);
+		Player player = new Player(level, "player", 10, 5, 7, 5);
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
 		Item helmet = new Item(level, "testName", EquipmentSlot.HELMET, 5, 3);
 		
@@ -91,7 +91,7 @@ public class ActorTest {
 		int actorDamage = actor.calculateAttack();
 		int expectedHealth = actor.getHealthPoints() - (playerDamage + actorDamage / 5);
 		
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		assertEquals(expectedHealth, actor.getHealthPoints());
 	}
 	
@@ -109,7 +109,7 @@ public class ActorTest {
 		player.equip(weapon);
 		player.equip(helmet);
 		player.equip(shield);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		int expectedActorHealth = 9;
 		
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
@@ -132,7 +132,7 @@ public class ActorTest {
 		player.equip(helmet);
 		player.equip(torso);
 		player.equip(legs);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		
 		int expectedActorHealth = 6;
 		int expectedPlayerHealth = 3;
@@ -161,7 +161,7 @@ public class ActorTest {
 		player.equip(torso);
 		player.equip(legs);
 		player.equip(shield);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		
 		int expectedActorHealth = 1;
 		int expectedPlayerHealth = 4;
@@ -178,9 +178,9 @@ public class ActorTest {
 		
 		player.addItemToInventory(weapon);
 		player.equip(weapon);
-		actor.onContact(player, level);	
+		actor.onPlayerContact(player);	
 		int expectedActorHealth = 15;
-		int expectedPlayerHealth = 99;
+		int expectedPlayerHealth = -9;
 		
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
 		assertEquals(expectedPlayerHealth, player.getHealthPoints());
@@ -194,10 +194,10 @@ public class ActorTest {
 		player.addItemToInventory(helmet);
 		
 		player.equip(helmet);
-		actor.onContact(player, level);
+		actor.onPlayerContact(player);
 		
 		int expectedActorHealth = 20;
-		int expectedPlayerHealth = 99;
+		int expectedPlayerHealth = -9;
 		
 		assertEquals(expectedActorHealth, actor.getHealthPoints());
 		assertEquals(expectedPlayerHealth, player.getHealthPoints());

@@ -63,6 +63,10 @@ public class Actor extends Entity {
 		return "healthPoints: " + healthPoints + "\nSpeed: " + getSpeed() + "\nIntelligence: " + getIntelligence()
 				+ "\nStrength: " + getStrength();
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	public int getSpeed() {
 		return speed;
@@ -75,30 +79,22 @@ public class Actor extends Entity {
 	public void setIntelligence(int intelligence) {
 		this.intelligence = intelligence;
 	}
-
-	public void onContact(Entity entity, Level level) {
-		if (entity instanceof Player) {
-			Player opponent = (Player) entity;
-			tradeBlows(opponent);
-
-			if (!opponent.isAlive()) {
-				level.removeEntity(opponent);
-			}
-			if (!isAlive()) {
-				level.removeEntity(this);
-			}
+	public void onPlayerContact(Player player) {
+		attack(player);
+		player.attack(this);
+	}
+	
+	public void attack(Actor opponent) {
+		int damage = calculateAttack();
+		System.out.println(getName() + " attacks " + opponent.getName() + " for " + damage + " damage.");
+		
+		opponent.takeDamage(damage);
+		
+		if(!opponent.isAlive()) {
+			opponent.getLevel().removeEntity(opponent);
 		}
 	}
-
-	private void tradeBlows(Player opponent) {
-		opponent.takeDamage(calculateAttack());
-		takeDamage(opponent.calculateAttack());
-
-		if (opponent.slotEquiped(EquipmentSlot.HELMET) && opponent.slotEquiped(EquipmentSlot.WEAPON)) {
-			takeDamage(calculateAttack() / 5);
-		}
-	}
-
+	
 	public boolean isAlive() {
 		return healthPoints > 0;
 	}
