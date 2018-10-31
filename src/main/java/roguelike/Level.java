@@ -27,13 +27,13 @@ public class Level {
 	}
 
 	public void placeEntity(Entity entity, Point point) {
-		if (!positions.contains(point)) {
-			throw new IllegalArgumentException("Level does not have that point.");
-		}
-
-		if (entityLocations.inverse().get(point) != null) {
-			throw new IllegalArgumentException("Point is taken.");
-		}
+//		if (!positions.contains(point)) {
+//			throw new IllegalArgumentException("Level does not have that point.");
+//		}
+//
+//		if (entityLocations.inverse().get(point) != null) {
+//			throw new IllegalArgumentException("Point is taken.");
+//		}
 
 		entityLocations.put(entity, point);
 	}
@@ -101,6 +101,7 @@ public class Level {
 				case LEFT:
 					adjacentPoint = new Point(entityPoint.x - 1, entityPoint.y);
 					break;
+				
 			}
 		} else {
 			adjacentPoint = entityPoint;

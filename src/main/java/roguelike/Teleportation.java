@@ -13,9 +13,9 @@ public class Teleportation implements Ability {
 	public Teleportation(String name, int requiredIntelligence) {
 		this.name = name;
 
-		if (requiredIntelligence <1 || requiredIntelligence > 99) {
-			throw new IllegalArgumentException();
-		}
+//		if (requiredIntelligence <1 || requiredIntelligence > 99) {
+//			throw new IllegalArgumentException();
+//		}
 		this.requiredIntelligence = requiredIntelligence;
 	}
 

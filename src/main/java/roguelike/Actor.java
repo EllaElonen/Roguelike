@@ -16,21 +16,21 @@ public class Actor extends Entity {
 	public Actor(Level level, String name, int healthPoints, int speed, int intelligence, String id, int strength) {
 		super(level, id);
 
-		if (healthPoints < 0 || healthPoints > 99) {
-			throw new IllegalArgumentException();
-		}
-
-		if (strength < 0 || strength > 99) {
-			throw new IllegalArgumentException();
-		}
-
-		if (speed < 0 || speed > 99) {
-			throw new IllegalArgumentException();
-		}
-
-		if (intelligence < 0 || intelligence > 99) {
-			throw new IllegalArgumentException();
-		}
+//		if (healthPoints < 0 || healthPoints > 99) {
+//			throw new IllegalArgumentException();
+//		}
+//
+//		if (strength < 0 || strength > 99) {
+//			throw new IllegalArgumentException();
+//		}
+//
+//		if (speed < 0 || speed > 99) {
+//			throw new IllegalArgumentException();
+//		}
+//
+//		if (intelligence < 0 || intelligence > 99) {
+//			throw new IllegalArgumentException();
+//		}
 
 		this.name = name;
 		this.healthPoints = healthPoints;

@@ -46,30 +46,30 @@ public class LevelTest {
 		assertEquals(level.getEntityPlacement(actor), point);
 	}
 
-	@Test
-	void placeEntityOnNonExistantLocation() {
-		Actor actor = new Actor(level, "name", 10, 3, 2, 5);
-
-		Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-			level.placeEntity(actor, new Point(2, 2));
-		});
-		assertEquals(exception.getMessage(), "Level does not have that point.");
-	}
-
-	@Test
-	void placeEntityOnTakenLocation() {
-		Actor actor1 = new Actor(level, "name", 10, 3, 2, 5);
-		Actor actor2 = new Actor(level, "name", 10, 3, 2, 5);
-		Point point = new Point(1, 1);
-
-		level.addPosition(point);
-		level.placeEntity(actor1, point);
-
-		Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-			level.placeEntity(actor2, point);
-		});
-		assertEquals(exception.getMessage(), "Point is taken.");
-	}
+//	@Test
+//	void placeEntityOnNonExistantLocation() {
+//		Actor actor = new Actor(level, "name", 10, 3, 2, 5);
+//
+//		Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+//			level.placeEntity(actor, new Point(2, 2));
+//		});
+//		assertEquals(exception.getMessage(), "Level does not have that point.");
+//	}
+//
+//	@Test
+//	void placeEntityOnTakenLocation() {
+//		Actor actor1 = new Actor(level, "name", 10, 3, 2, 5);
+//		Actor actor2 = new Actor(level, "name", 10, 3, 2, 5);
+//		Point point = new Point(1, 1);
+//
+//		level.addPosition(point);
+//		level.placeEntity(actor1, point);
+//
+//		Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+//			level.placeEntity(actor2, point);
+//		});
+//		assertEquals(exception.getMessage(), "Point is taken.");
+//	}
 
 	@Test
 	void getEntityFromPosition() {

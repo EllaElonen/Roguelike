@@ -104,20 +104,20 @@ public class AbilityTest {
 
 	}
 
-	@Test
-	void tooHighRequiredIntelligence() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Teleportation("name", 100);
-		});
-
-	}
-	@Test
-	void tooLowRequiredIntelligence() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Teleportation("name", 0);
-		});
-
-	}
+//	@Test
+//	void tooHighRequiredIntelligence() {
+//		assertThrows(IllegalArgumentException.class, () -> {
+//			new Teleportation("name", 100);
+//		});
+//
+//	}
+//	@Test
+//	void tooLowRequiredIntelligence() {
+//		assertThrows(IllegalArgumentException.class, () -> {
+//			new Teleportation("name", 0);
+//		});
+//
+//	}
 
 
 
