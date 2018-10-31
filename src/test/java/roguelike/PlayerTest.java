@@ -66,8 +66,7 @@ public class PlayerTest {
 	@Test
 	void testAddTooManyItemsToInventory() {
 		for (int index = 0; index < 30; index++) {
-			assertTrue(testPlayer
-					.addItemToInventory(new Item(level, "Weapon" + index, EquipmentSlot.WEAPON, 0, 0)));
+			assertTrue(testPlayer.addItemToInventory(new Item(level, "Weapon" + index, EquipmentSlot.WEAPON, 0, 0)));
 		}
 		assertFalse(testPlayer.addItemToInventory(testItem), "Exceeded item limit");
 
@@ -107,20 +106,19 @@ public class PlayerTest {
 
 	@Test
 	void moveLeft() {
-		for(int i=1;i<10;i++) {
-			for(int j=1;j<10;j++) {
-				level.addPosition(new Point(i,j));
+		for (int i = 1; i < 10; i++) {
+			for (int j = 1; j < 10; j++) {
+				level.addPosition(new Point(i, j));
 			}
 		}
-		
+
 		Player player = new Player(level, "name", 10, 3, 2, 5);
-		level.placeEntity(player, new Point(2,2));
+		level.placeEntity(player, new Point(2, 2));
 
-		Point newPoint = new Point(1,2);
+		Point newPoint = new Point(1, 2);
 		player.move(Direction.LEFT);
-		assertEquals(newPoint,level.getEntityPlacement(player));
+		assertEquals(newPoint, level.getEntityPlacement(player));
 	}
-
 
 	@Test
 	public void addExtraLives() {
@@ -128,8 +126,6 @@ public class PlayerTest {
 		player.addExtraLives(1);
 		assertEquals(player.getLives(), 4);
 	}
-
-	
 
 //	@Test
 //	void attackWeakerMonster() {
@@ -187,21 +183,21 @@ public class PlayerTest {
 	void attack() {
 		Actor actor = new Actor(level, "name", 20, 10, 10, 1);
 		int expectedHealth = actor.getHealthPoints() - testPlayer.getStrength();
-		
+
 		testPlayer.attack(actor);
-		
+
 		assertEquals(expectedHealth, actor.getHealthPoints());
 	}
-	
+
 	@Test
 	void attackWithWeapon() {
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 0);
 		Actor actor = new Actor(level, "name", 20, 10, 10, 1);
-		
+
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(weapon);
 		actor.onPlayerContact(testPlayer);
-		
+
 		assertEquals(5, actor.getHealthPoints());
 	}
 
@@ -209,64 +205,64 @@ public class PlayerTest {
 	void takeDamageWithArmor() {
 		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
 		Item helmet = new Item(level, "testName", EquipmentSlot.HELMET, 5, 3);
-		
-		int damage=10;
-		int effectiveDamage=damage-((shield.getPlusDefense() + helmet.getPlusDefense())/2);
-		int expectedHealth=testPlayer.getHealthPoints() - effectiveDamage;
-						
+
+		int damage = 10;
+		int effectiveDamage = damage - ((shield.getPlusDefense() + helmet.getPlusDefense()) / 2);
+		int expectedHealth = testPlayer.getHealthPoints() - effectiveDamage;
 
 		testPlayer.addItemToInventory(shield);
 		testPlayer.addItemToInventory(helmet);
 		testPlayer.equip(shield);
 		testPlayer.equip(helmet);
 		testPlayer.takeDamage(damage);
-		assertEquals(expectedHealth,testPlayer.getHealthPoints());
-		
+		assertEquals(expectedHealth, testPlayer.getHealthPoints());
+
 	}
-	
-	// Alla dessa tester måste skrivas om så att de testar attackmetoden istället.
+
+	// Alla dessa tester måste skrivas om så att de testar attackmetoden
+	// istället.
 	@Test
 	void attackWithWeaponAndLegs() {
 		Actor opponent = new Actor(level, "name", 20, 10, 10, 1);
 		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
-		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);	
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
 		int expectedHealth = opponent.getHealthPoints() - (testPlayer.getStrength() + weapon.getPlusDamage() * 2);
-		
+
 		testPlayer.addItemToInventory(legs);
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(legs);
 		testPlayer.equip(weapon);
 		testPlayer.attack(opponent);
-		
+
 		assertEquals(expectedHealth, opponent.getHealthPoints());
 	}
-	
+
 	@Test
 	void attackWithWeaponAndShield() {
 		Actor opponent = new Actor(level, "name", 20, 10, 10, 1);
 		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
-		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);	
-		int expectedHealth = opponent.getHealthPoints() - 
-				(testPlayer.getStrength() + weapon.getPlusDamage() + shield.getPlusDamage());
-		
+		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
+		int expectedHealth = opponent.getHealthPoints()
+				- (testPlayer.getStrength() + weapon.getPlusDamage() + shield.getPlusDamage());
+
 		testPlayer.addItemToInventory(shield);
 		testPlayer.addItemToInventory(weapon);
 		testPlayer.equip(shield);
 		testPlayer.equip(weapon);
 		testPlayer.attack(opponent);
-		
+
 		assertEquals(expectedHealth, opponent.getHealthPoints());
 	}
-	
+
 	@Test
 	void attackWithWeaponAndLegsAndShield() {
 		Actor opponent = new Actor(level, "name", 20, 10, 10, 1);
 		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
 		Item weapon = new Item(level, "testName", EquipmentSlot.WEAPON, 5, 3);
 		Item shield = new Item(level, "testName", EquipmentSlot.SHIELD, 5, 2);
-		int expectedHealth = opponent.getHealthPoints() - 
-				(testPlayer.getStrength() + weapon.getPlusDamage() * 2 + shield.getPlusDamage());
-		
+		int expectedHealth = opponent.getHealthPoints()
+				- (testPlayer.getStrength() + weapon.getPlusDamage() * 2 + shield.getPlusDamage());
+
 		testPlayer.addItemToInventory(shield);
 		testPlayer.addItemToInventory(legs);
 		testPlayer.addItemToInventory(weapon);
@@ -274,19 +270,19 @@ public class PlayerTest {
 		testPlayer.equip(legs);
 		testPlayer.equip(weapon);
 		testPlayer.attack(opponent);
-		
+
 		assertEquals(expectedHealth, opponent.getHealthPoints());
 	}
-	
+
 	@Test
 	void takeDamageWithHelmetAndTorsoAndLegs() {
 		Item helmet = new Item(level, "testName", EquipmentSlot.HELMET, 5, 3);
 		Item torso = new Item(level, "testName", EquipmentSlot.TORSO, 5, 2);
-		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);	
+		Item legs = new Item(level, "testName", EquipmentSlot.LEGS, 5, 2);
 		int damage = 10;
-		int expectedDefense = (helmet.getPlusDefense() + torso.getPlusDefense() + legs.getPlusDefense())/2;
-		int expectedHealth = testPlayer.getHealthPoints() - (damage - (expectedDefense))/2;
-		
+		int expectedDefense = (helmet.getPlusDefense() + torso.getPlusDefense() + legs.getPlusDefense()) / 2;
+		int expectedHealth = testPlayer.getHealthPoints() - (damage - (expectedDefense)) / 2;
+
 		testPlayer.addItemToInventory(helmet);
 		testPlayer.addItemToInventory(torso);
 		testPlayer.addItemToInventory(legs);
@@ -294,7 +290,72 @@ public class PlayerTest {
 		testPlayer.equip(torso);
 		testPlayer.equip(legs);
 		testPlayer.takeDamage(damage);
-		
+
 		assertEquals(expectedHealth, testPlayer.getHealthPoints());
+	}
+	@Test
+	void takeDamageWithHelmetAndTorso() {
+		Item helmet = new Item(level, "testName", EquipmentSlot.HELMET, 5, 3);
+		Item torso = new Item(level, "testName", EquipmentSlot.TORSO, 5, 2);
+		int damage = 10;
+		int expectedDefense = (helmet.getPlusDefense() + torso.getPlusDefense() ) / 2;
+		int expectedHealth = testPlayer.getHealthPoints() - (damage - expectedDefense);
+
+		testPlayer.addItemToInventory(helmet);
+		testPlayer.addItemToInventory(torso);
+		testPlayer.equip(helmet);
+		testPlayer.equip(torso);
+		testPlayer.takeDamage(damage);
+
+		assertEquals(expectedHealth, testPlayer.getHealthPoints());
+	}
+
+	@Test
+	void learnAbilityAndCast() {
+		Teleportation t = new Teleportation("name", 2);
+		testPlayer.learnAbility(t);
+		Actor actor1 = new Actor(level, "name", 10, 9, 1, 10);
+		Actor actor2 = new Actor(level, "name", 10, 9, 1, 10);
+
+		create10x10Positions();
+		level.placeEntity(testPlayer, new Point(1, 1));
+		level.placeEntity(actor1, new Point(2, 2));
+		level.placeEntity(actor2, new Point(3, 3));
+		testPlayer.castAbility(t.getName());
+
+		assertNotEquals(new Point(1, 1), level.getEntityPlacement(testPlayer));
+		assertNotNull(level.getEntityPlacement(testPlayer));
+
+	}
+
+	@Test
+	void castAbilityNotLearned() {
+		Teleportation t = new Teleportation("name", 2);
+		Actor actor1 = new Actor(level, "name", 10, 9, 1, 10);
+		Actor actor2 = new Actor(level, "name", 10, 9, 1, 10);
+
+		create10x10Positions();
+		level.placeEntity(testPlayer, new Point(1, 1));
+		level.placeEntity(actor1, new Point(2, 2));
+		level.placeEntity(actor2, new Point(3, 3));
+		testPlayer.castAbility(t.getName());
+
+		assertEquals(new Point(1, 1), level.getEntityPlacement(testPlayer));
+		assertNotNull(level.getEntityPlacement(testPlayer));
+	}
+
+	@Test
+	void createADeadPlayer() {
+		Player testPlayer1 = new Player(level, "name", 10, 3, 2, 10);
+		testPlayer1.addExtraLives(-4);
+		assertFalse(testPlayer1.isAlive());
+	}
+
+	void create10x10Positions() {
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				level.addPosition(new Point(i, j));
+			}
+		}
 	}
 }

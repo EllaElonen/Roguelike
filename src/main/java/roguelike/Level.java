@@ -17,7 +17,7 @@ public class Level {
 	public Level(String name) {
 		this.name = name;
 	}
-
+	
 	public void addPosition(Point point) {
 		positions.add(point);
 	}
@@ -86,7 +86,7 @@ public class Level {
 	
 	private Point getPointInDirectionOf(Entity entity, Direction direction) {
 		Point entityPoint = entityLocations.get(entity);
-		Point adjacentPoint;
+		Point adjacentPoint = entityPoint;
 		if (entityPoint != null) {
 			switch (direction) {
 				case UP:
@@ -101,8 +101,6 @@ public class Level {
 				case LEFT:
 					adjacentPoint = new Point(entityPoint.x - 1, entityPoint.y);
 					break;
-				default:
-					adjacentPoint = entityPoint;
 			}
 		} else {
 			adjacentPoint = entityPoint;

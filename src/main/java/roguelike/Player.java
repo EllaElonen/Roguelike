@@ -152,7 +152,12 @@ public class Player extends Actor {
 		}
 	}
 	public boolean isAlive() {
-		return getHealthPoints() > 0&&lives>0;
+		if(getHealthPoints() > 0) {
+			if(lives > 0) {
+				return true;
+			}
+		}
+		return false;
 
 	}
 	

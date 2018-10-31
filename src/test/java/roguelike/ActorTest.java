@@ -11,57 +11,57 @@ public class ActorTest {
 	Level level= new Level("levelName");
 	//Point point = new Point(1,1);
 	
-//	@Test
-//	public void negativeHP() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", -10, 5, 2, 10);
-//		});
-//	}
-//	
-//	@Test
-//	public void negativeStrength() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 10, 5, 2, -10);
-//		});
-//	}
-//	
-//	@Test
-//	public void negativeSpeed() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 10, -5, 2, 10);
-//		});	
-//	}
-//
-//	@Test
-//	public void negativeIntelligence() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 10, 5, -2, 10);
-//		});	
-//	}
-//	@Test
-//	public void tooHighIntelligence() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 10, 5, 200, 10);
-//		});	
-//	}
-//	@Test
-//	public void tooHighHP() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 110, 5, 2, 10);
-//		});
-//	}
-//	@Test
-//	public void tooHighSpeed() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 10, 300, 2, 10);
-//		});	
-//	}
-//	@Test
-//	public void tooHighStrength() {
-//		assertThrows (IllegalArgumentException.class, () ->{
-//			new Actor(level, "name", 10, 5, 2, 120);
-//		});
-//	}
+	@Test
+	public void negativeHP() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", -10, 5, 2, 10);
+		});
+	}
+	
+	@Test
+	public void negativeStrength() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 10, 5, 2, -10);
+		});
+	}
+	
+	@Test
+	public void negativeSpeed() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 10, -5, 2, 10);
+		});	
+	}
+
+	@Test
+	public void negativeIntelligence() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 10, 5, -2, 10);
+		});	
+	}
+	@Test
+	public void tooHighIntelligence() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 10, 5, 200, 10);
+		});	
+	}
+	@Test
+	public void tooHighHP() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 110, 5, 2, 10);
+		});
+	}
+	@Test
+	public void tooHighSpeed() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 10, 300, 2, 10);
+		});	
+	}
+	@Test
+	public void tooHighStrength() {
+		assertThrows (IllegalArgumentException.class, () ->{
+			new Actor(level, "name", 10, 5, 2, 120);
+		});
+	}
 	
 	@Test
 	public void listStats() {

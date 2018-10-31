@@ -6,7 +6,6 @@ import java.util.UUID;
 public abstract class Entity {
 
 	private String uniqueID;
-	// private Level level;
 	private Level level;
 
 	public Entity(Level level) {

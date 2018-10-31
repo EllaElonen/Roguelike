@@ -1,7 +1,5 @@
 package roguelike;
 
-import java.awt.Point;
-
 public class Item extends Entity{
 	private String name;
 	private EquipmentSlot slot;
