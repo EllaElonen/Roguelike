@@ -1,23 +1,17 @@
 package roguelike;
 
-import java.awt.Point;
-
 public class Item extends Entity{
 	private String name;
 	private EquipmentSlot slot;
 	private int plusDamage;
 	private int plusDefense;
 
-	public Item(Point position, String name, EquipmentSlot slot, int plusDamage, int plusDefense) {
-		super(position);
+	public Item(Level level, String name, EquipmentSlot slot, int plusDamage, int plusDefense) {
+		super(level);
 		this.name = name;
 		this.slot = slot;
 		this.plusDamage = plusDamage;
 		this.plusDefense = plusDefense;
-	}
-	
-	public String getName(){
-		return name;
 	}
 	
 	public EquipmentSlot getSlot() {
@@ -28,12 +22,9 @@ public class Item extends Entity{
 		return plusDamage;
 	}
 	
-	public void onContact(Entity entity, Level level) {
-		if (entity instanceof Player) {
-			Player player = (Player)entity;
+	public void onPlayerContact(Player player) {
 			player.addItemToInventory(this);
-			level.removeEntity(this);
-		}
+			getLevel().removeEntity(this);
 	}
 
 	public int getPlusDefense() {
